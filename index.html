@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swish</title>
+  <script src="main.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-auth.js"></script>
+  <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.6.2/firebaseui.css" />
+
+
+</head>
+
+<body>
+  <script>
+  var config = {
+    apiKey: "AIzaSyC8uV-2fN2TKfyn9Wijpksc_-0gUWpusxo",
+    authDomain: "tenk-ac696.firebaseapp.com",
+    databaseURL: "https://tenk-ac696.firebaseio.com",
+    projectId: "tenk-ac696",
+    storageBucket: "tenk-ac696.appspot.com",
+    messagingSenderId: "71540690911"
+  };
+
+  firebase.initializeApp(config);
+    
+
+    var app = Elm.Main.fullscreen();
+
+
+
+
+
+
+      // FirebaseUI config.
+      var uiConfig = {
+        signInSuccessUrl: 'http://localhost:8000/index.html',
+        signInOptions: [
+          // Leave the lines as is for the providers you want to offer your users.
+          firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        ],
+        // Terms of service url.
+        // tosUrl: '<your-tos-url>'
+      };
+
+      // Initialize the FirebaseUI Widget using Firebase.
+      var ui = new firebaseui.auth.AuthUI(firebase.auth());
+      // The start method will wait until the DOM is loaded.
+      ui.start('#firebaseui-auth-container', uiConfig);
+
+
+
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+        document.getElementById("firebaseui-auth-container").style.display = "none";
+        var currentUser = { };
+        currentUser.email = user.email;
+        currentUser.uid = user.uid;
+        app.ports.loadUser.send(currentUser);
+        console.log(currentUser)
+      } else {
+        console.log("no user")
+      }
+    });
+    </script>
+    <div id="firebaseui-auth-container">
+    </div>
+</body>
