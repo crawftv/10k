@@ -1,15 +1,38 @@
 var _user$project$Main$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
-		return {
-			ctor: '_Tuple2',
-			_0: _elm_lang$core$Native_Utils.update(
-				model,
-				{
-					currentUser: _elm_lang$core$Maybe$Just(_p0._0)
-				}),
-			_1: _elm_lang$core$Platform_Cmd$none
-		};
+		switch (_p0.ctor) {
+			case 'LoadUser':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							currentUser: _elm_lang$core$Maybe$Just(_p0._0)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'NewGoalName':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							newGoalName: _elm_lang$core$Maybe$Just(_p0._0)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							newGoalGoal: _elm_lang$core$Maybe$Just(_p0._0)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+		}
 	});
 var _user$project$Main$loadUser = _elm_lang$core$Native_Platform.incomingPort(
 	'loadUser',
@@ -19,90 +42,147 @@ var _user$project$Main$loadUser = _elm_lang$core$Native_Platform.incomingPort(
 			return A2(
 				_elm_lang$core$Json_Decode$andThen,
 				function (uid) {
-					return A2(
-						_elm_lang$core$Json_Decode$andThen,
-						function (userGoals) {
-							return _elm_lang$core$Json_Decode$succeed(
-								{email: email, uid: uid, userGoals: userGoals});
-						},
-						A2(
-							_elm_lang$core$Json_Decode$field,
-							'userGoals',
-							_elm_lang$core$Json_Decode$list(
-								A2(
-									_elm_lang$core$Json_Decode$andThen,
-									function (goalName) {
-										return A2(
-											_elm_lang$core$Json_Decode$andThen,
-											function (endGoal) {
-												return A2(
-													_elm_lang$core$Json_Decode$andThen,
-													function (progress) {
-														return _elm_lang$core$Json_Decode$succeed(
-															{goalName: goalName, endGoal: endGoal, progress: progress});
-													},
-													A2(_elm_lang$core$Json_Decode$field, 'progress', _elm_lang$core$Json_Decode$int));
-											},
-											A2(_elm_lang$core$Json_Decode$field, 'endGoal', _elm_lang$core$Json_Decode$int));
-									},
-									A2(_elm_lang$core$Json_Decode$field, 'goalName', _elm_lang$core$Json_Decode$string)))));
+					return _elm_lang$core$Json_Decode$succeed(
+						{email: email, uid: uid});
 				},
 				A2(_elm_lang$core$Json_Decode$field, 'uid', _elm_lang$core$Json_Decode$string));
 		},
 		A2(_elm_lang$core$Json_Decode$field, 'email', _elm_lang$core$Json_Decode$string)));
-var _user$project$Main$Model = F2(
-	function (a, b) {
-		return {currentUser: a, currentGoal: b};
+var _user$project$Main$Model = F5(
+	function (a, b, c, d, e) {
+		return {currentUser: a, newGoalName: b, newGoalGoal: c, newGoalProgress: d, userGoals: e};
 	});
 var _user$project$Main$init = {
 	ctor: '_Tuple2',
-	_0: A2(_user$project$Main$Model, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
+	_0: A5(_user$project$Main$Model, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
 	_1: _elm_lang$core$Platform_Cmd$none
 };
-var _user$project$Main$User = F3(
-	function (a, b, c) {
-		return {email: a, uid: b, userGoals: c};
+var _user$project$Main$User = F2(
+	function (a, b) {
+		return {email: a, uid: b};
 	});
 var _user$project$Main$Goal = F3(
 	function (a, b, c) {
 		return {goalName: a, endGoal: b, progress: c};
 	});
+var _user$project$Main$NewGoalGoal = function (a) {
+	return {ctor: 'NewGoalGoal', _0: a};
+};
+var _user$project$Main$NewGoalName = function (a) {
+	return {ctor: 'NewGoalName', _0: a};
+};
 var _user$project$Main$LoadUser = function (a) {
 	return {ctor: 'LoadUser', _0: a};
 };
 var _user$project$Main$subscriptions = function (model) {
 	return _user$project$Main$loadUser(_user$project$Main$LoadUser);
 };
+var _user$project$Main$Error = {ctor: 'Error'};
+var _user$project$Main$NoStyle = {ctor: 'NoStyle'};
 var _user$project$Main$CreateGoalView = {ctor: 'CreateGoalView'};
-var _user$project$Main$createGoalView = A3(
-	_mdgriffith$style_elements$Element$row,
-	_user$project$Main$CreateGoalView,
-	{ctor: '[]'},
-	{
-		ctor: '::',
-		_0: A3(
-			_mdgriffith$style_elements$Element$el,
-			_user$project$Main$CreateGoalView,
-			{ctor: '[]'},
-			_mdgriffith$style_elements$Element$text('Goal Name')),
-		_1: {
+var _user$project$Main$createGoalNameView = function (newGoalName) {
+	return A3(
+		_mdgriffith$style_elements$Element_Input$text,
+		_user$project$Main$CreateGoalView,
+		{ctor: '[]'},
+		{
+			onChange: _user$project$Main$NewGoalName,
+			value: function () {
+				var _p1 = newGoalName;
+				if (_p1.ctor === 'Nothing') {
+					return '';
+				} else {
+					return _p1._0;
+				}
+			}(),
+			label: _mdgriffith$style_elements$Element_Input$placeholder(
+				{
+					label: _mdgriffith$style_elements$Element_Input$labelLeft(
+						A3(
+							_mdgriffith$style_elements$Element$el,
+							_user$project$Main$NoStyle,
+							{ctor: '[]'},
+							_mdgriffith$style_elements$Element$text('Goal Name: '))),
+					text: 'Placeholder!'
+				}),
+			options: {ctor: '[]'}
+		});
+};
+var _user$project$Main$createGoalGoalView = function (newGoalGoal) {
+	return A3(
+		_mdgriffith$style_elements$Element_Input$text,
+		_user$project$Main$CreateGoalView,
+		{ctor: '[]'},
+		{
+			onChange: _user$project$Main$NewGoalGoal,
+			value: function () {
+				var _p2 = newGoalGoal;
+				if (_p2.ctor === 'Nothing') {
+					return '';
+				} else {
+					return _p2._0;
+				}
+			}(),
+			label: _mdgriffith$style_elements$Element_Input$placeholder(
+				{
+					label: _mdgriffith$style_elements$Element_Input$labelLeft(
+						A3(
+							_mdgriffith$style_elements$Element$el,
+							_user$project$Main$NoStyle,
+							{ctor: '[]'},
+							_mdgriffith$style_elements$Element$text('How many steps is this goal?: '))),
+					text: '10,000'
+				}),
+			options: {ctor: '[]'}
+		});
+};
+var _user$project$Main$createGoalProgressView = function (newGoalProgress) {
+	return A3(
+		_mdgriffith$style_elements$Element_Input$text,
+		_user$project$Main$CreateGoalView,
+		{ctor: '[]'},
+		{
+			onChange: _user$project$Main$NewGoalGoal,
+			value: function () {
+				var _p3 = newGoalProgress;
+				if (_p3.ctor === 'Nothing') {
+					return '';
+				} else {
+					return _p3._0;
+				}
+			}(),
+			label: _mdgriffith$style_elements$Element_Input$placeholder(
+				{
+					label: _mdgriffith$style_elements$Element_Input$labelLeft(
+						A3(
+							_mdgriffith$style_elements$Element$el,
+							_user$project$Main$NoStyle,
+							{ctor: '[]'},
+							_mdgriffith$style_elements$Element$text('How many steps have you taken on this goal?: '))),
+					text: '0'
+				}),
+			options: {ctor: '[]'}
+		});
+};
+var _user$project$Main$createGoalView = function (model) {
+	return A3(
+		_mdgriffith$style_elements$Element$column,
+		_user$project$Main$NoStyle,
+		{ctor: '[]'},
+		{
 			ctor: '::',
-			_0: A3(
-				_mdgriffith$style_elements$Element$el,
-				_user$project$Main$CreateGoalView,
-				{ctor: '[]'},
-				_mdgriffith$style_elements$Element$text('End Goal')),
+			_0: _user$project$Main$createGoalNameView(model.newGoalName),
 			_1: {
 				ctor: '::',
-				_0: A3(
-					_mdgriffith$style_elements$Element$el,
-					_user$project$Main$CreateGoalView,
-					{ctor: '[]'},
-					_mdgriffith$style_elements$Element$text('Current Progess')),
-				_1: {ctor: '[]'}
+				_0: _user$project$Main$createGoalGoalView(model.newGoalGoal),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Main$createGoalProgressView(model.newGoalProgress),
+					_1: {ctor: '[]'}
+				}
 			}
-		}
-	});
+		});
+};
 var _user$project$Main$TitleBar = {ctor: 'TitleBar'};
 var _user$project$Main$stylesheet = _mdgriffith$style_elements$Style$styleSheet(
 	{
@@ -141,12 +221,30 @@ var _user$project$Main$stylesheet = _mdgriffith$style_elements$Style$styleSheet(
 						}
 					}
 				}),
-			_1: {ctor: '[]'}
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_mdgriffith$style_elements$Style$style,
+					_user$project$Main$NoStyle,
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_mdgriffith$style_elements$Style$style,
+						_user$project$Main$Error,
+						{
+							ctor: '::',
+							_0: _mdgriffith$style_elements$Style_Color$text(_elm_lang$core$Color$red),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
 		}
 	});
 var _user$project$Main$userView = function (user) {
-	var _p1 = user;
-	if (_p1.ctor === 'Nothing') {
+	var _p4 = user;
+	if (_p4.ctor === 'Nothing') {
 		return A3(
 			_mdgriffith$style_elements$Element$el,
 			_user$project$Main$TitleBar,
@@ -157,18 +255,32 @@ var _user$project$Main$userView = function (user) {
 			_mdgriffith$style_elements$Element$el,
 			_user$project$Main$TitleBar,
 			{ctor: '[]'},
-			_mdgriffith$style_elements$Element$text(_p1._0.email));
+			_mdgriffith$style_elements$Element$text(_p4._0.email));
 	}
+};
+var _user$project$Main$titleView = function (model) {
+	return _user$project$Main$userView(model.currentUser);
+};
+var _user$project$Main$pageArea = function (model) {
+	return A3(
+		_mdgriffith$style_elements$Element$column,
+		_user$project$Main$NoStyle,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _user$project$Main$titleView(model),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Main$createGoalView(model),
+				_1: {ctor: '[]'}
+			}
+		});
 };
 var _user$project$Main$view = function (model) {
 	return A2(
 		_mdgriffith$style_elements$Element$layout,
 		_user$project$Main$stylesheet,
-		A3(
-			_mdgriffith$style_elements$Element$h1,
-			_user$project$Main$TitleBar,
-			{ctor: '[]'},
-			_user$project$Main$userView(model.currentUser)));
+		_user$project$Main$pageArea(model));
 };
 var _user$project$Main$main = _elm_lang$html$Html$program(
 	{init: _user$project$Main$init, update: _user$project$Main$update, subscriptions: _user$project$Main$subscriptions, view: _user$project$Main$view})();

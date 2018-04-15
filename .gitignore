@@ -1,0 +1,10 @@
+functions/etc/
+functions/lib/
+functions/node_modules/
+functions/package.json
+functions/tsconfig.json
+functions/tslint.json
+elmstuff/
+.git/
+elm-package.json
+.firebaserc
