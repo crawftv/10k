@@ -11,12 +11,8 @@ admin.initializeApp(functions.config().firebase);
 export const createNewUserDoc = functions.auth.user().onCreate((user) => {
   const uid = user.uid;
   const userEmail = user.email;
-  admin.database().ref('users/'+ uid).set({
+  return admin.firestore().doc('users/'+uid).set({
     email: userEmail,
     uid: uid,
-  }).then(function(){
-    console.log("document successfully create");
-  }).catch(function(error){
-    console.error("Error creating doc: ", error);
-  });
+  })
 });

@@ -28,15 +28,7 @@
   };
 
   firebase.initializeApp(config);
-
-
     var app = Elm.Main.fullscreen();
-
-
-
-
-
-
       // FirebaseUI config.
       var uiConfig = {
         signInSuccessUrl: 'http://localhost:8000/index.html',
@@ -45,11 +37,6 @@
           firebase.auth.EmailAuthProvider.PROVIDER_ID,
         ]
       };
-
-
-
-
-
       firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
         document.getElementById("firebaseui-auth-container").style.display = "none";
@@ -57,13 +44,60 @@
         currentUser.email = user.email;
         currentUser.uid = user.uid;
         app.ports.loadUser.send(currentUser);
-        console.log(currentUser)
+        firebase.firestore().collection("Goals").where("uid", "==", user.uid)
+        .onSnapshot(function(querySnapshot) {
+            var goalList = [];
+
+            querySnapshot.forEach(function(doc) {
+              var goal = {};
+              goal.goalName = doc.data().goalName;
+              goal.endGoal = doc.data().endGoal;
+              goal.goalProgress = doc.data().goalProgress;
+              goalList.push(goal);
+            });
+              console.log(goalList);
+            });
+
       } else {
         var ui = new firebaseui.auth.AuthUI(firebase.auth());
         ui.start('#firebaseui-auth-container', uiConfig);
-        console.log("no user")
       }
     });
+    app.ports.newGoal.subscribe(function(createGoalArray){
+      var user = firebase.auth().currentUser;
+      x = Number(createGoalArray[1])
+      y = Number(createGoalArray[2])
+      console.log(createGoalArray[0],x,y, user.uid)
+      firebase.firestore().collection("Goals").add({
+          goalName: createGoalArray[0],
+          endGoal: x,
+          goalProgress: y,
+          uid: user.uid
+      }).then(function(docRef) {
+        // todo: send this into elm and gui
+          console.log("Document written with ID: ", docRef.id);
+
+          })
+      .catch(function(error) {
+        // todo: send this into elm and gui
+          console.error("Error adding document: ", error);
+      });
+    });
+    // var user = firebase.auth().currentUser;
+    // var goalListener = firebase.firestore().collection("Goals").where("uid", "==", user.uid)
+    // .onSnapshot(function(querySnapshot) {
+    //     var goalList = [];
+    //     var goal = {};
+    //     querySnapshot.forEach(function(doc) {
+    //       goal.goalName = doc.data().goalName;
+    //       goal.endGoal = doc.data().endGoal;
+    //       goal.goalProgress = doc.data().goalProgress;
+    //       goalList.push(goal);
+    //
+    //       })
+    //       console.log("Current goals: ", goalList);
+    //     });
+
     </script>
     <div id="firebaseui-auth-container">
     </div>

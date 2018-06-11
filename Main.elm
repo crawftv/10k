@@ -5,6 +5,8 @@ import Style exposing (..)
 import Style.Color as Color
 import Style.Font as Font
 import Element.Input as Input
+import Element.Attributes as Att
+import Element.Events as Ev
 import Color exposing (..)
 import Html exposing (Html)
 
@@ -12,7 +14,7 @@ import Html exposing (Html)
 type alias Model =
     { currentUser : Maybe User
     , newGoalName : Maybe String
-    , newGoalGoal : Maybe String
+    , newEndGoal : Maybe String
     , newGoalProgress : Maybe String
     , userGoals : Maybe (List Goal)
     }
@@ -34,7 +36,9 @@ type alias Goal =
 type Msg
     = LoadUser User
     | NewGoalName String
-    | NewGoalGoal String
+    | NewEndGoal String
+    | NewGoalProgress String
+    | SendNewGoal
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -46,8 +50,14 @@ update msg model =
         NewGoalName goalName ->
             ( { model | newGoalName = Just goalName }, Cmd.none )
 
-        NewGoalGoal goalGoal ->
-            ( { model | newGoalGoal = Just goalGoal }, Cmd.none )
+        NewEndGoal endGoal ->
+            ( { model | newEndGoal = Just endGoal }, Cmd.none )
+
+        NewGoalProgress goalProgress ->
+            ( { model | newGoalProgress = Just goalProgress }, Cmd.none )
+
+        SendNewGoal ->
+            ( model, newGoal ( model.newGoalName, model.newEndGoal, model.newGoalProgress ) )
 
 
 main =
@@ -72,9 +82,12 @@ subscriptions model =
 port loadUser : (User -> msg) -> Sub msg
 
 
+port newGoal : ( Maybe String, Maybe String, Maybe String ) -> Cmd msg
+
+
 type MyStyles
     = TitleBar
-    | CreateGoalView
+    | CreateGoalStyle
     | NoStyle
     | Error
 
@@ -86,9 +99,9 @@ stylesheet =
             , Color.background blue
             , Font.size 24
             ]
-        , Style.style CreateGoalView
+        , Style.style CreateGoalStyle
             [ Color.text blue
-            , Color.background white
+            , Color.background grey
             , Font.size 16
             ]
         , Style.style NoStyle
@@ -118,13 +131,24 @@ createGoalView : Model -> Element MyStyles variation Msg
 createGoalView model =
     Element.column NoStyle
         []
-        [ createGoalNameView model.newGoalName, createGoalGoalView model.newGoalGoal, createGoalProgressView model.newGoalProgress ]
+        [ createGoalNameView model.newGoalName
+        , createEndGoalView model.newEndGoal
+        , createGoalProgressView model.newGoalProgress
+        , createGoalSubmit
+        ]
+
+
+createGoalSubmit : Element MyStyles variation Msg
+createGoalSubmit =
+    button CreateGoalStyle
+        [ Att.width (Att.px 800), Att.height (Att.px 25), (Ev.onClick SendNewGoal) ]
+        (text "Create New Goal")
 
 
 createGoalNameView : Maybe String -> Element MyStyles variation Msg
 createGoalNameView newGoalName =
-    Input.text CreateGoalView
-        []
+    Input.text CreateGoalStyle
+        [ Att.width (Att.px 400) ]
         { onChange = NewGoalName
         , value =
             case newGoalName of
@@ -135,7 +159,7 @@ createGoalNameView newGoalName =
                     newGoalName
         , label =
             Input.placeholder
-                { label = Input.labelLeft (el NoStyle [] (text "Goal Name: "))
+                { label = Input.labelLeft (el NoStyle [ Att.width (Att.px 400) ] (text "Goal Name: "))
                 , text = "Placeholder!"
                 }
         , options =
@@ -144,21 +168,21 @@ createGoalNameView newGoalName =
         }
 
 
-createGoalGoalView : Maybe String -> Element MyStyles variation Msg
-createGoalGoalView newGoalGoal =
-    Input.text CreateGoalView
-        []
-        { onChange = NewGoalGoal
+createEndGoalView : Maybe String -> Element MyStyles variation Msg
+createEndGoalView newEndGoal =
+    Input.text CreateGoalStyle
+        [ Att.width (Att.px 400) ]
+        { onChange = NewEndGoal
         , value =
-            case newGoalGoal of
+            case newEndGoal of
                 Nothing ->
                     ""
 
-                Just newGoalGoal ->
-                    newGoalGoal
+                Just newEndGoal ->
+                    newEndGoal
         , label =
             Input.placeholder
-                { label = Input.labelLeft (el NoStyle [] (text "How many steps is this goal?: "))
+                { label = Input.labelLeft (el NoStyle [ Att.width (Att.px 400) ] (text "How many steps is this goal?: "))
                 , text = "10,000"
                 }
         , options =
@@ -169,19 +193,19 @@ createGoalGoalView newGoalGoal =
 
 createGoalProgressView : Maybe String -> Element MyStyles variation Msg
 createGoalProgressView newGoalProgress =
-    Input.text CreateGoalView
-        []
-        { onChange = NewGoalGoal
+    Input.text CreateGoalStyle
+        [ Att.width (Att.px 400) ]
+        { onChange = NewGoalProgress
         , value =
             case newGoalProgress of
                 Nothing ->
                     ""
 
-                Just newGoalGoal ->
-                    newGoalGoal
+                Just newGoalProgess ->
+                    newGoalProgess
         , label =
             Input.placeholder
-                { label = Input.labelLeft (el NoStyle [] (text "How many steps have you taken on this goal?: "))
+                { label = Input.labelLeft (el NoStyle [ Att.width (Att.px 400) ] (text "How many steps have you taken on this goal?: "))
                 , text = "0"
                 }
         , options =
