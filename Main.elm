@@ -213,12 +213,15 @@ createGoalProgressView newGoalProgress =
             ]
         }
 
+goalView : Maybe Goal -> Element Mystyles variation Msg
+goalView goal =
+
+
+
+pageArea model =
+    Element.column NoStyle [] [ titleView model, createGoalView model ]
 
 view : Model -> Html Msg
 view model =
     Element.layout stylesheet <|
         pageArea model
-
-
-pageArea model =
-    Element.column NoStyle [] [ titleView model, createGoalView model ]
