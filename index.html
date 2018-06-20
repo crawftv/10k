@@ -52,10 +52,11 @@
               var goal = {};
               goal.goalName = doc.data().goalName;
               goal.endGoal = doc.data().endGoal;
-              goal.goalProgress = doc.data().goalProgress;
+              goal.progress = doc.data().goalProgress;
+              goal.fireStoreValue = doc.id;
               goalList.push(goal);
             });
-              console.log(goalList);
+              app.ports.loadGoals.send(goalList);
             });
 
       } else {
@@ -68,20 +69,31 @@
       x = Number(createGoalArray[1])
       y = Number(createGoalArray[2])
       console.log(createGoalArray[0],x,y, user.uid)
-      firebase.firestore().collection("Goals").add({
-          goalName: createGoalArray[0],
-          endGoal: x,
-          goalProgress: y,
-          uid: user.uid
-      }).then(function(docRef) {
-        // todo: send this into elm and gui
-          console.log("Document written with ID: ", docRef.id);
+      if (isNaN(x)) {
+        window.alert("Please make sure to only the numbers 0-9 when inputting the number of steps in your goal. You may use decimal places. You cannot use commas.")
+      } else if (isNaN(y)) {
+        window.alert("Please make sure to only the numbers 0-9 when inputting the number of steps you have taken. You may use decimal places. You cannot use commas.")
+      } else if (createGoalArray[0] == null) {
+        window.alert("Please include a name for your goal.")
+      }
 
-          })
-      .catch(function(error) {
-        // todo: send this into elm and gui
-          console.error("Error adding document: ", error);
-      });
+      else {
+        firebase.firestore().collection("Goals").add({
+            goalName: createGoalArray[0],
+            endGoal: x,
+            goalProgress: y,
+            uid: user.uid
+        }).then(function(docRef) {
+          // todo: send this into elm and gui
+            console.log("Document written with ID: ", docRef.id);
+
+            })
+        .catch(function(error) {
+          // todo: send this into elm and gui
+            console.error("Error adding document: ", error);
+        });
+      }
+
     });
     // var user = firebase.auth().currentUser;
     // var goalListener = firebase.firestore().collection("Goals").where("uid", "==", user.uid)

@@ -28,8 +28,9 @@ type alias User =
 
 type alias Goal =
     { goalName : String
-    , endGoal : Int
-    , progress : Int
+    , endGoal : Float
+    , progress : Float
+    , fireStoreValue : String
     }
 
 
@@ -39,6 +40,7 @@ type Msg
     | NewEndGoal String
     | NewGoalProgress String
     | SendNewGoal
+    | LoadGoals (List Goal)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -46,6 +48,9 @@ update msg model =
     case msg of
         LoadUser user ->
             ( { model | currentUser = Just user }, Cmd.none )
+
+        LoadGoals userGoals ->
+            ( { model | userGoals = Just userGoals }, Cmd.none )
 
         NewGoalName goalName ->
             ( { model | newGoalName = Just goalName }, Cmd.none )
@@ -76,10 +81,16 @@ init =
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    loadUser LoadUser
+    Sub.batch
+        [ loadUser LoadUser
+        , loadGoals LoadGoals
+        ]
 
 
 port loadUser : (User -> msg) -> Sub msg
+
+
+port loadGoals : (List Goal -> msg) -> Sub msg
 
 
 port newGoal : ( Maybe String, Maybe String, Maybe String ) -> Cmd msg
@@ -163,7 +174,7 @@ createGoalNameView newGoalName =
                 , text = "Placeholder!"
                 }
         , options =
-            [-- [ Input.errorBelow (el Error [] (text "This is an Error!"))
+            [ Input.allowSpellcheck
             ]
         }
 
@@ -213,13 +224,32 @@ createGoalProgressView newGoalProgress =
             ]
         }
 
-goalView : Maybe Goal -> Element Mystyles variation Msg
-goalView goal =
 
+goalIndividualView : Goal -> Element MyStyles variation Msg
+goalIndividualView goal =
+    el NoStyle [] (text goal.goalName)
+
+
+goalListView : Maybe (List Goal) -> Element MyStyles variation Msg
+goalListView userGoals =
+    case userGoals of
+        Nothing ->
+            el NoStyle [] (text "No Goals")
+
+        Just userGoals ->
+            userGoals
+                |> List.map goalIndividualView
+                |> Element.column NoStyle []
+
+
+goalView : Model -> Element MyStyles variation Msg
+goalView model =
+    Element.column NoStyle [] [ goalListView model.userGoals ]
 
 
 pageArea model =
-    Element.column NoStyle [] [ titleView model, createGoalView model ]
+    Element.column NoStyle [] [ titleView model, createGoalView model, goalView model ]
+
 
 view : Model -> Html Msg
 view model =
