@@ -4,6 +4,7 @@ import Element exposing (..)
 import Style exposing (..)
 import Style.Color as Color
 import Style.Font as Font
+import Style.Border as Border
 import Element.Input as Input
 import Element.Attributes as Att
 import Element.Events as Ev
@@ -100,6 +101,7 @@ type MyStyles
     = TitleBar
     | CreateGoalStyle
     | NoStyle
+    | GoalCard
     | Error
 
 
@@ -117,6 +119,12 @@ stylesheet =
             ]
         , Style.style NoStyle
             []
+        , Style.style GoalCard
+            [ Border.all 1
+            , Border.solid
+            , Color.border black
+            , Border.rounded 3
+            ]
         , Style.style Error
             [ Color.text Color.red
             ]
@@ -225,9 +233,22 @@ createGoalProgressView newGoalProgress =
         }
 
 
+
+-- goalIndividualView : Goal -> Element MyStyles variation Msg
+-- goalIndividualView goal =
+--     Element.column GoalCard [] ([ text goal.goalName, text (toString goal.endGoal), text (toString goal.progress) ])
+
+
 goalIndividualView : Goal -> Element MyStyles variation Msg
 goalIndividualView goal =
-    el NoStyle [] (text goal.goalName)
+    Element.column GoalCard
+        []
+        [ Element.row NoStyle
+            []
+            [ el NoStyle [] (text "Goal Name: ")
+            , el NoStyle [] (text goal.goalName)
+            ]
+        ]
 
 
 goalListView : Maybe (List Goal) -> Element MyStyles variation Msg
@@ -239,12 +260,12 @@ goalListView userGoals =
         Just userGoals ->
             userGoals
                 |> List.map goalIndividualView
-                |> Element.column NoStyle []
+                |> Element.column NoStyle [ Att.width (Att.percent 100), Att.spacing 20 ]
 
 
 goalView : Model -> Element MyStyles variation Msg
 goalView model =
-    Element.column NoStyle [] [ goalListView model.userGoals ]
+    Element.column NoStyle [ Att.center ] [ goalListView model.userGoals ]
 
 
 pageArea model =
