@@ -18,6 +18,7 @@ type alias Model =
     , newEndGoal : Maybe String
     , newGoalProgress : Maybe String
     , userGoals : Maybe (List Goal)
+    , selectedGoalId : Maybe String
     }
 
 
@@ -42,6 +43,7 @@ type Msg
     | NewGoalProgress String
     | SendNewGoal
     | LoadGoals (List Goal)
+    | SelectGoal String
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -65,7 +67,11 @@ update msg model =
         SendNewGoal ->
             ( model, newGoal ( model.newGoalName, model.newEndGoal, model.newGoalProgress ) )
 
+        SelectGoal selectedGoalId ->
+            ( { model | selectedGoalId = Just selectedGoalId }, Cmd.none )
 
+
+main : Program Never Model Msg
 main =
     Html.program
         { init = init
@@ -77,7 +83,7 @@ main =
 
 init : ( Model, Cmd Msg )
 init =
-    ( Model Nothing Nothing Nothing Nothing Nothing, Cmd.none )
+    ( Model Nothing Nothing Nothing Nothing Nothing Nothing, Cmd.none )
 
 
 subscriptions : Model -> Sub Msg
@@ -105,6 +111,7 @@ type MyStyles
     | Error
 
 
+stylesheet : StyleSheet MyStyles variation
 stylesheet =
     Style.styleSheet
         [ Style.style TitleBar
@@ -162,6 +169,13 @@ createGoalSubmit =
     button CreateGoalStyle
         [ Att.width (Att.px 800), Att.height (Att.px 25), (Ev.onClick SendNewGoal) ]
         (text "Create New Goal")
+
+
+selectGoalButton : Goal -> Element MyStyles variation Msg
+selectGoalButton currentGoal =
+    button CreateGoalStyle
+        [ Att.width (Att.px 800), Att.height (Att.px 25), (Ev.onClick (SelectGoal currentGoal.fireStoreValue)) ]
+        (text "update this goal")
 
 
 createGoalNameView : Maybe String -> Element MyStyles variation Msg
@@ -233,12 +247,6 @@ createGoalProgressView newGoalProgress =
         }
 
 
-
--- goalIndividualView : Goal -> Element MyStyles variation Msg
--- goalIndividualView goal =
---     Element.column GoalCard [] ([ text goal.goalName, text (toString goal.endGoal), text (toString goal.progress) ])
-
-
 goalIndividualView : Goal -> Element MyStyles variation Msg
 goalIndividualView goal =
     Element.column GoalCard
@@ -248,6 +256,17 @@ goalIndividualView goal =
             [ el NoStyle [] (text "Goal Name: ")
             , el NoStyle [] (text goal.goalName)
             ]
+        , Element.row NoStyle
+            []
+            [ el NoStyle [] (text "Goal Progress: ")
+            , el NoStyle [] (text (toString goal.progress))
+            ]
+        , Element.row NoStyle
+            []
+            [ el NoStyle [] (text "End Goal: ")
+            , el NoStyle [] (text (toString goal.endGoal))
+            ]
+        , selectGoalButton goal
         ]
 
 
@@ -255,7 +274,7 @@ goalListView : Maybe (List Goal) -> Element MyStyles variation Msg
 goalListView userGoals =
     case userGoals of
         Nothing ->
-            el NoStyle [] (text "No Goals")
+            el NoStyle [] (text "No user goals")
 
         Just userGoals ->
             userGoals
@@ -268,8 +287,9 @@ goalView model =
     Element.column NoStyle [ Att.center ] [ goalListView model.userGoals ]
 
 
+pageArea : Model -> Element MyStyles variation Msg
 pageArea model =
-    Element.column NoStyle [] [ titleView model, createGoalView model, goalView model ]
+    Element.column NoStyle [] [ titleView model, createGoalView model, goalView model, text (toString model.selectedGoalId) ]
 
 
 view : Model -> Html Msg
