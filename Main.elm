@@ -18,7 +18,8 @@ type alias Model =
     , newEndGoal : Maybe String
     , newGoalProgress : Maybe String
     , userGoals : Maybe (List Goal)
-    , selectedGoalId : Maybe String
+    , selectedGoalId : String
+    , addProgress : String
     }
 
 
@@ -33,6 +34,7 @@ type alias Goal =
     , endGoal : Float
     , progress : Float
     , fireStoreValue : String
+    , addProgress : String
     }
 
 
@@ -44,6 +46,8 @@ type Msg
     | SendNewGoal
     | LoadGoals (List Goal)
     | SelectGoal String
+    | AddProgress String
+    | SendProgress ( String, Float )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -68,7 +72,18 @@ update msg model =
             ( model, newGoal ( model.newGoalName, model.newEndGoal, model.newGoalProgress ) )
 
         SelectGoal selectedGoalId ->
-            ( { model | selectedGoalId = Just selectedGoalId }, Cmd.none )
+            ( { model | selectedGoalId = selectedGoalId }, Cmd.none )
+
+        AddProgress addProgress ->
+            ( { model | addProgress = addProgress }, Cmd.none )
+
+        SendProgress ( selectedGoalId, progress ) ->
+            case (Result.withDefault 0 (String.toFloat model.addProgress)) of
+                0 ->
+                    ( model, Cmd.none )
+
+                _ ->
+                    ( { model | selectedGoalId = "", addProgress = "", userGoals = Nothing }, sendProgress ( model.addProgress, progress, selectedGoalId ) )
 
 
 main : Program Never Model Msg
@@ -83,7 +98,7 @@ main =
 
 init : ( Model, Cmd Msg )
 init =
-    ( Model Nothing Nothing Nothing Nothing Nothing Nothing, Cmd.none )
+    ( Model Nothing Nothing Nothing Nothing Nothing "" "", Cmd.none )
 
 
 subscriptions : Model -> Sub Msg
@@ -100,6 +115,9 @@ port loadUser : (User -> msg) -> Sub msg
 port loadGoals : (List Goal -> msg) -> Sub msg
 
 
+port sendProgress : ( String, Float, String ) -> Cmd msg
+
+
 port newGoal : ( Maybe String, Maybe String, Maybe String ) -> Cmd msg
 
 
@@ -109,6 +127,7 @@ type MyStyles
     | NoStyle
     | GoalCard
     | Error
+    | HelpView
 
 
 stylesheet : StyleSheet MyStyles variation
@@ -132,6 +151,7 @@ stylesheet =
             , Color.border black
             , Border.rounded 3
             ]
+        , Style.style HelpView [ Border.all 1, Border.dashed, Color.border red ]
         , Style.style Error
             [ Color.text Color.red
             ]
@@ -173,8 +193,8 @@ createGoalSubmit =
 
 selectGoalButton : Goal -> Element MyStyles variation Msg
 selectGoalButton currentGoal =
-    button CreateGoalStyle
-        [ Att.width (Att.px 800), Att.height (Att.px 25), (Ev.onClick (SelectGoal currentGoal.fireStoreValue)) ]
+    button HelpView
+        [ Att.height (Att.px 25), (Ev.onClick (SendProgress ( currentGoal.fireStoreValue, currentGoal.progress ))) ]
         (text "update this goal")
 
 
@@ -251,21 +271,34 @@ goalIndividualView : Goal -> Element MyStyles variation Msg
 goalIndividualView goal =
     Element.column GoalCard
         []
-        [ Element.row NoStyle
+        [ Element.row HelpView
             []
-            [ el NoStyle [] (text "Goal Name: ")
-            , el NoStyle [] (text goal.goalName)
+            [ el HelpView [ Att.width (Att.percent 50) ] (text "Goal Name: ")
+            , el HelpView [ Att.width (Att.percent 50) ] (text goal.goalName)
             ]
-        , Element.row NoStyle
+        , Element.row HelpView
             []
-            [ el NoStyle [] (text "Goal Progress: ")
-            , el NoStyle [] (text (toString goal.progress))
+            [ el HelpView [ Att.width (Att.percent 50) ] (text "Goal Progress: ")
+            , el HelpView [ Att.width (Att.percent 50) ] (text (toString goal.progress))
             ]
-        , Element.row NoStyle
+        , Element.row HelpView
             []
-            [ el NoStyle [] (text "End Goal: ")
-            , el NoStyle [] (text (toString goal.endGoal))
+            [ el HelpView [ Att.width (Att.percent 50) ] (text "End Goal: ")
+            , el HelpView [ Att.width (Att.percent 50) ] (text (toString goal.endGoal))
             ]
+        , Input.text HelpView
+            [ Att.width (Att.percent 50) ]
+            { onChange = AddProgress
+            , value = goal.addProgress
+            , label =
+                Input.placeholder
+                    { label = Input.labelLeft (el HelpView [ Att.width (Att.percent 50) ] (text "Update this goal?: "))
+                    , text = ""
+                    }
+            , options =
+                [-- [ Input.errorBelow (el Error [] (text "This is an Error!"))
+                ]
+            }
         , selectGoalButton goal
         ]
 
@@ -279,7 +312,7 @@ goalListView userGoals =
         Just userGoals ->
             userGoals
                 |> List.map goalIndividualView
-                |> Element.column NoStyle [ Att.width (Att.percent 100), Att.spacing 20 ]
+                |> Element.column NoStyle [ Att.width (Att.percent 50), Att.spacing 20 ]
 
 
 goalView : Model -> Element MyStyles variation Msg
@@ -289,7 +322,7 @@ goalView model =
 
 pageArea : Model -> Element MyStyles variation Msg
 pageArea model =
-    Element.column NoStyle [] [ titleView model, createGoalView model, goalView model, text (toString model.selectedGoalId) ]
+    Element.column NoStyle [] [ titleView model, createGoalView model, goalView model, "addProgress " ++ (text toString (model.addProgress)) ]
 
 
 view : Model -> Html Msg
