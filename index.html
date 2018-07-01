@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Swish</title>
   <script src="main.js"></script>
+
   <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-auth.js"></script>
@@ -18,6 +19,8 @@
 
 <body>
   <script>
+  var app = Elm.Main.fullscreen();
+
   var config = {
     apiKey: "AIzaSyC8uV-2fN2TKfyn9Wijpksc_-0gUWpusxo",
     authDomain: "tenk-ac696.firebaseapp.com",
@@ -28,7 +31,7 @@
   };
 
   firebase.initializeApp(config);
-  var app = Elm.Main.fullscreen();
+
       // FirebaseUI config.
   var uiConfig = {
       signInSuccessUrl: 'http://localhost:8000/index.html',
@@ -131,10 +134,9 @@
           .catch(function(error) {
             // todo: send this into elm and gui
               console.error("Error adding document: ", error);
-          });
+            });
         }
-});
-
+      });
 
 
     </script>

@@ -1,15 +1,11 @@
 port module Main exposing (..)
 
 import Element exposing (..)
-import Style exposing (..)
-import Style.Color as Color
-import Style.Font as Font
-import Style.Border as Border
 import Element.Input as Input
 import Element.Attributes as Att
 import Element.Events as Ev
-import Color exposing (..)
 import Html exposing (Html)
+import StyleSheets exposing (MyStyles, stylesheet)
 
 
 type alias Model =
@@ -121,61 +117,41 @@ port sendProgress : ( String, Float, String ) -> Cmd msg
 port newGoal : ( Maybe String, Maybe String, Maybe String ) -> Cmd msg
 
 
-type MyStyles
-    = TitleBar
-    | CreateGoalStyle
-    | NoStyle
-    | GoalCard
-    | Error
-    | HelpView
+helpView =
+    StyleSheets.HelpView
 
 
-stylesheet : StyleSheet MyStyles variation
-stylesheet =
-    Style.styleSheet
-        [ Style.style TitleBar
-            [ Color.text white
-            , Color.background blue
-            , Font.size 24
-            ]
-        , Style.style CreateGoalStyle
-            [ Color.text blue
-            , Color.background grey
-            , Font.size 16
-            ]
-        , Style.style NoStyle
-            []
-        , Style.style GoalCard
-            [ Border.all 1
-            , Border.solid
-            , Color.border black
-            , Border.rounded 3
-            ]
-        , Style.style HelpView [ Border.all 1, Border.dashed, Color.border red ]
-        , Style.style Error
-            [ Color.text Color.red
-            ]
-        ]
+noStyle =
+    StyleSheets.NoStyle
 
 
 userView : Maybe User -> Element MyStyles variation msg
 userView user =
     case user of
         Nothing ->
-            el TitleBar [] (text "Please Sign in")
+            el helpView [ Att.alignRight ] (text "Please Sign in")
 
         Just user ->
-            el TitleBar [] (text user.email)
+            el helpView [ Att.alignRight ] (text user.email)
 
 
-titleView : Model -> Element MyStyles variation msg
-titleView model =
-    userView model.currentUser
+topBarView : Model -> Element MyStyles variation msg
+topBarView model =
+    Element.row helpView
+        [ Att.width Att.fill ]
+        [ el helpView [ Att.width Att.fill, Att.alignLeft ] (text "Goal Tracker")
+        , el helpView [ Att.width Att.fill, Att.alignRight ] (userView model.currentUser)
+        ]
+
+
+centerCreateGoalView : Model -> Element MyStyles variation Msg
+centerCreateGoalView model =
+    el helpView [ Att.center, Att.width (Att.percent 50) ] (createGoalView model)
 
 
 createGoalView : Model -> Element MyStyles variation Msg
 createGoalView model =
-    Element.column NoStyle
+    Element.column helpView
         []
         [ createGoalNameView model.newGoalName
         , createEndGoalView model.newEndGoal
@@ -184,24 +160,10 @@ createGoalView model =
         ]
 
 
-createGoalSubmit : Element MyStyles variation Msg
-createGoalSubmit =
-    button CreateGoalStyle
-        [ Att.width (Att.px 800), Att.height (Att.px 25), (Ev.onClick SendNewGoal) ]
-        (text "Create New Goal")
-
-
-selectGoalButton : Goal -> Element MyStyles variation Msg
-selectGoalButton currentGoal =
-    button HelpView
-        [ Att.height (Att.px 25), (Ev.onClick (SendProgress ( currentGoal.fireStoreValue, currentGoal.progress ))) ]
-        (text "update this goal")
-
-
 createGoalNameView : Maybe String -> Element MyStyles variation Msg
 createGoalNameView newGoalName =
-    Input.text CreateGoalStyle
-        [ Att.width (Att.px 400) ]
+    Input.text helpView
+        [ Att.width (Att.percent 50) ]
         { onChange = NewGoalName
         , value =
             case newGoalName of
@@ -212,7 +174,7 @@ createGoalNameView newGoalName =
                     newGoalName
         , label =
             Input.placeholder
-                { label = Input.labelLeft (el NoStyle [ Att.width (Att.px 400) ] (text "Goal Name: "))
+                { label = Input.labelLeft (el helpView [ Att.width (Att.percent 50) ] (text "Goal Name: "))
                 , text = "Placeholder!"
                 }
         , options =
@@ -223,8 +185,8 @@ createGoalNameView newGoalName =
 
 createEndGoalView : Maybe String -> Element MyStyles variation Msg
 createEndGoalView newEndGoal =
-    Input.text CreateGoalStyle
-        [ Att.width (Att.px 400) ]
+    Input.text helpView
+        [ Att.width (Att.percent 50) ]
         { onChange = NewEndGoal
         , value =
             case newEndGoal of
@@ -235,7 +197,7 @@ createEndGoalView newEndGoal =
                     newEndGoal
         , label =
             Input.placeholder
-                { label = Input.labelLeft (el NoStyle [ Att.width (Att.px 400) ] (text "How many steps is this goal?: "))
+                { label = Input.labelLeft (el helpView [ Att.width (Att.percent 50) ] (text "How many steps is this goal?: "))
                 , text = "10,000"
                 }
         , options =
@@ -246,8 +208,8 @@ createEndGoalView newEndGoal =
 
 createGoalProgressView : Maybe String -> Element MyStyles variation Msg
 createGoalProgressView newGoalProgress =
-    Input.text CreateGoalStyle
-        [ Att.width (Att.px 400) ]
+    Input.text helpView
+        [ Att.width (Att.percent 50) ]
         { onChange = NewGoalProgress
         , value =
             case newGoalProgress of
@@ -258,7 +220,7 @@ createGoalProgressView newGoalProgress =
                     newGoalProgess
         , label =
             Input.placeholder
-                { label = Input.labelLeft (el NoStyle [ Att.width (Att.px 400) ] (text "How many steps have you taken on this goal?: "))
+                { label = Input.labelLeft (el helpView [ Att.width (Att.percent 50) ] (text "How many steps have you taken on this goal?: "))
                 , text = "0"
                 }
         , options =
@@ -267,32 +229,39 @@ createGoalProgressView newGoalProgress =
         }
 
 
+createGoalSubmit : Element MyStyles variation Msg
+createGoalSubmit =
+    button helpView
+        [ Att.height (Att.px 25), (Ev.onClick SendNewGoal) ]
+        (text "Create New Goal")
+
+
 goalIndividualView : Goal -> Element MyStyles variation Msg
 goalIndividualView goal =
-    Element.column GoalCard
+    Element.column helpView
         []
-        [ Element.row HelpView
+        [ Element.row helpView
             []
-            [ el HelpView [ Att.width (Att.percent 50) ] (text "Goal Name: ")
-            , el HelpView [ Att.width (Att.percent 50) ] (text goal.goalName)
+            [ el helpView [ Att.width (Att.percent 50) ] (text "Goal Name: ")
+            , el helpView [ Att.width (Att.percent 50) ] (text goal.goalName)
             ]
-        , Element.row HelpView
+        , Element.row helpView
             []
-            [ el HelpView [ Att.width (Att.percent 50) ] (text "Goal Progress: ")
-            , el HelpView [ Att.width (Att.percent 50) ] (text (toString goal.progress))
+            [ el helpView [ Att.width (Att.percent 50) ] (text "Goal Progress: ")
+            , el helpView [ Att.width (Att.percent 50) ] (text (toString goal.progress))
             ]
-        , Element.row HelpView
+        , Element.row helpView
             []
-            [ el HelpView [ Att.width (Att.percent 50) ] (text "End Goal: ")
-            , el HelpView [ Att.width (Att.percent 50) ] (text (toString goal.endGoal))
+            [ el helpView [ Att.width (Att.percent 50) ] (text "End Goal: ")
+            , el helpView [ Att.width (Att.percent 50) ] (text (toString goal.endGoal))
             ]
-        , Input.text HelpView
+        , Input.text helpView
             [ Att.width (Att.percent 50) ]
             { onChange = AddProgress
             , value = goal.addProgress
             , label =
                 Input.placeholder
-                    { label = Input.labelLeft (el HelpView [ Att.width (Att.percent 50) ] (text "Update this goal?: "))
+                    { label = Input.labelLeft (el helpView [ Att.width (Att.percent 50) ] (text "Update this goal?: "))
                     , text = ""
                     }
             , options =
@@ -303,29 +272,47 @@ goalIndividualView goal =
         ]
 
 
+selectGoalButton : Goal -> Element MyStyles variation Msg
+selectGoalButton currentGoal =
+    button helpView
+        [ Att.height (Att.px 25), (Ev.onClick (SendProgress ( currentGoal.fireStoreValue, currentGoal.progress ))) ]
+        (text "update this goal")
+
+
 goalListView : Maybe (List Goal) -> Element MyStyles variation Msg
 goalListView userGoals =
     case userGoals of
         Nothing ->
-            el NoStyle [] (text "No user goals")
+            el noStyle [] (text "No user goals")
 
         Just userGoals ->
             userGoals
                 |> List.map goalIndividualView
-                |> Element.column NoStyle [ Att.width (Att.percent 50), Att.spacing 20 ]
+                |> Element.column noStyle [ Att.width (Att.percent 50), Att.spacing 20 ]
 
 
 goalView : Model -> Element MyStyles variation Msg
 goalView model =
-    Element.column NoStyle [ Att.center ] [ goalListView model.userGoals ]
+    Element.column noStyle [ Att.center ] [ goalListView model.userGoals ]
 
 
 pageArea : Model -> Element MyStyles variation Msg
 pageArea model =
-    Element.column NoStyle [] [ titleView model, createGoalView model, goalView model, "addProgress " ++ (text toString (model.addProgress)) ]
+    Element.column noStyle [] [ topBarView model, centerCreateGoalView model, goalView model ]
+
+
+landingPageArea : Model -> Element MyStyles variation Msg
+landingPageArea model =
+    el noStyle [] (topBarView model)
 
 
 view : Model -> Html Msg
 view model =
-    Element.layout stylesheet <|
-        pageArea model
+    case model.currentUser of
+        Nothing ->
+            Element.layout stylesheet <|
+                landingPageArea model
+
+        _ ->
+            Element.layout stylesheet <|
+                pageArea model
