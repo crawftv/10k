@@ -6,32 +6,9 @@ import Element.Attributes as Att
 import Element.Events as Ev
 import Html exposing (Html)
 import StyleSheets exposing (MyStyles, stylesheet)
-
-
-type alias Model =
-    { currentUser : Maybe User
-    , newGoalName : Maybe String
-    , newEndGoal : Maybe String
-    , newGoalProgress : Maybe String
-    , userGoals : Maybe (List Goal)
-    , selectedGoalId : String
-    , addProgress : String
-    }
-
-
-type alias User =
-    { email : String
-    , uid : String
-    }
-
-
-type alias Goal =
-    { goalName : String
-    , endGoal : Float
-    , progress : Float
-    , fireStoreValue : String
-    , addProgress : String
-    }
+import AppNavBar
+import DesktopLandingPage
+import Model exposing (..)
 
 
 type Msg
@@ -133,15 +110,6 @@ userView user =
 
         Just user ->
             el helpView [ Att.alignRight ] (text user.email)
-
-
-topBarView : Model -> Element MyStyles variation msg
-topBarView model =
-    Element.row helpView
-        [ Att.width Att.fill ]
-        [ el helpView [ Att.width Att.fill, Att.alignLeft ] (text "Goal Tracker")
-        , el helpView [ Att.width Att.fill, Att.alignRight ] (userView model.currentUser)
-        ]
 
 
 centerCreateGoalView : Model -> Element MyStyles variation Msg
@@ -298,20 +266,19 @@ goalView model =
 
 pageArea : Model -> Element MyStyles variation Msg
 pageArea model =
-    Element.column noStyle [] [ topBarView model, centerCreateGoalView model, goalView model ]
+    Element.column noStyle [ Att.spacing 10 ] [ AppNavBar.topBarView model, centerCreateGoalView model, goalView model ]
 
 
-landingPageArea : Model -> Element MyStyles variation Msg
-landingPageArea model =
-    el noStyle [] (topBarView model)
+landingPageArea : Html Msg
+landingPageArea =
+    DesktopLandingPage.view
 
 
 view : Model -> Html Msg
 view model =
     case model.currentUser of
         Nothing ->
-            Element.layout stylesheet <|
-                landingPageArea model
+            landingPageArea
 
         _ ->
             Element.layout stylesheet <|

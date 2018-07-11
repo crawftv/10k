@@ -1,4 +1,4 @@
-module LandingPage exposing (..)
+module DesktopLandingPage exposing (..)
 
 import Element exposing (..)
 import Element.Attributes as Att
@@ -6,7 +6,7 @@ import Element.Events as Ev
 import Html exposing (Html)
 import Window exposing (..)
 import ScreenSize exposing (..)
-import NavBar
+import LandingNavBar
 import StyleSheets exposing (MyStyles, stylesheet)
 
 
@@ -21,9 +21,9 @@ helpView =
 
 landingPageArea : Element MyStyles variation msg
 landingPageArea =
-    Element.wrappedColumn helpView
+    Element.wrappedColumn StyleSheets.NoStyle
         []
-        [ NavBar.topBarView
+        [ LandingNavBar.topBarView
         , Element.mainContent helpView [ Att.height (Att.px 500), Att.width (Att.fill) ] heroView
         , el helpView [ Att.height (Att.px 300) ] ctaView
         , el helpView [ Att.height (Att.px 400) ] featureView
