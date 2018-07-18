@@ -19,7 +19,7 @@
 
 <body>
   <script>
-  
+
 
   var config = {
     apiKey: "AIzaSyC8uV-2fN2TKfyn9Wijpksc_-0gUWpusxo",
@@ -43,7 +43,7 @@
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
       document.getElementById("firebaseui-auth-container").style.display = "none";
-
+      window.location.replace("index.html")
 
     } else {
       var ui = new firebaseui.auth.AuthUI(firebase.auth());

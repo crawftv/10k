@@ -25,3 +25,11 @@ type alias Goal =
     , fireStoreValue : String
     , addProgress : String
     }
+
+
+type alias CNGModel =
+    { currentUser : Maybe User
+    , newGoalName : Maybe String
+    , newEndGoal : Maybe String
+    , newGoalProgress : Maybe String
+    }

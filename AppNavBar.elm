@@ -26,7 +26,17 @@ navBar user =
                 }
 
         Just user ->
-            el helpView [ Att.alignRight ] (text user.email)
+            navigation helpView
+                [ Att.alignRight ]
+                { name = "Main Navigation"
+                , options =
+                    [ (el helpView [] (text user.email))
+                    , link
+                        "/logout"
+                        (el helpView [] (text "logout"))
+                    , link "createNewGoal.html" (el helpView [] (text "Create new goal"))
+                    ]
+                }
 
 
 topBarView : Model -> Element MyStyles variation msg

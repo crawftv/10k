@@ -19,7 +19,7 @@
 
 <body>
   <script>
-  var app = Elm.Main.fullscreen();
+  var app = Elm.CreateNewGoal.fullscreen();
 
   var config = {
     apiKey: "AIzaSyC8uV-2fN2TKfyn9Wijpksc_-0gUWpusxo",
@@ -32,10 +32,7 @@
 
   firebase.initializeApp(config);
 
-      // FirebaseUI config.
-  var uiConfig = {
-    
-    };
+
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
       document.getElementById("firebaseui-auth-container").style.display = "none";
@@ -43,27 +40,10 @@
       currentUser.email = user.email;
       currentUser.uid = user.uid;
       app.ports.loadUser.send(currentUser);
-      firebase.firestore().collection("Goals").where("uid", "==", user.uid)
-      .onSnapshot(function(querySnapshot) {
-          var goalList = [];
 
-          querySnapshot.forEach(function(doc) {
-            var goal = {};
-            goal.goalName = doc.data().goalName;
-            goal.endGoal = doc.data().endGoal;
-            goal.progress = doc.data().goalProgress;
-            goal.fireStoreValue = doc.id;
-            goal.addProgress = doc.data().addProgress;
-            goalList.push(goal);
-          });
-            app.ports.loadGoals.send(goalList);
-            console.log(goalList);
-          });
-
-    } else {
-
-      }
-    });
+      } else {
+        window.location.replace ("index.html")
+      }});
     app.ports.newGoal.subscribe(function(createGoalArray){
       var user = firebase.auth().currentUser;
       x = Number(createGoalArray[1])
@@ -85,7 +65,7 @@
             uid: user.uid
         }).then(function(docRef) {
             console.log("Document written with ID: ", docRef.id);
-            // todo: send this into elm and gui
+            window.location.replace("index.html")
             })
         .catch(function(error) {
           // todo: send this into elm and gui
@@ -93,45 +73,7 @@
         });
         }
           });
-      app.ports.sendProgress.subscribe(function(addProgress){
-        var user = firebase.auth().currentUser;
-        newProgress = Number(addProgress[0]),
-        currentProgress = Number(addProgress[1]),
-        docId = addProgress[2]
-        if (isNaN(newProgress)) {
-          window.alert("Please make sure to only the numbers 0-9 when updating the number of steps in your goal. You may use decimal places. You cannot use commas.")
-        } else if (newProgress == 0) {
-          window.alert("Please enter a number greater than 0 to update your goal")
-        }
-        else {
-          firebase.firestore().collection("Goals").doc(docId).update({
-              goalProgress: (newProgress + currentProgress),
-              addProgress: "0",
-          }).then(function() {
-            // todo: send this into elm and gui
-            firebase.firestore().collection("Goals").where("uid", "==", user.uid)
-            .onSnapshot(function(querySnapshot) {
-                var goalList = [];
 
-                querySnapshot.forEach(function(doc) {
-                  var goal = {};
-                  goal.goalName = doc.data().goalName;
-                  goal.endGoal = doc.data().endGoal;
-                  goal.progress = doc.data().goalProgress;
-                  goal.fireStoreValue = doc.id;
-                  goal.addProgress = doc.data().addProgress;
-                  goalList.push(goal);
-                });
-                  app.ports.loadGoals.send(goalList);
-                  console.log(goalList);
-                });
-          })
-          .catch(function(error) {
-            // todo: send this into elm and gui
-              console.error("Error adding document: ", error);
-            });
-        }
-      });
 
 
     </script>
