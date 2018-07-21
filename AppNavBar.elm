@@ -32,7 +32,7 @@ navBar user =
                 , options =
                     [ (el helpView [] (text user.email))
                     , link
-                        "/logout"
+                        "logout.html"
                         (el helpView [] (text "logout"))
                     , link "createNewGoal.html" (el helpView [] (text "Create new goal"))
                     ]

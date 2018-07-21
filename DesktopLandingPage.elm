@@ -4,8 +4,6 @@ import Element exposing (..)
 import Element.Attributes as Att
 import Element.Events as Ev
 import Html exposing (Html)
-import Window exposing (..)
-import ScreenSize exposing (..)
 import LandingNavBar
 import StyleSheets exposing (MyStyles, stylesheet)
 
@@ -15,6 +13,7 @@ main =
     view
 
 
+helpView : MyStyles
 helpView =
     StyleSheets.HelpView
 
@@ -41,10 +40,10 @@ heroView =
             [ Att.center, Att.height Att.fill, Att.spacing 5 ]
             [ el helpView [ Att.width Att.fill ] (text "image goes here")
             , Element.column helpView
-                [ Att.verticalCenter, Att.width Att.fill ]
-                [ el helpView [] (text "text")
-                , el helpView [] (text "text")
-                , el helpView [] (text "text")
+                [ Att.verticalCenter, Att.width Att.fill, Att.spacing 20 ]
+                [ el helpView [] (text "We hold you accountable with constant check-ups.")
+                , el helpView [] (text "Personalized help creating actionable goals")
+                , el helpView [] (text "Start becoming an expert in what you've always wanted Today!")
                 ]
             ]
         ]
