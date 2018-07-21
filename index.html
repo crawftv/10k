@@ -11,6 +11,7 @@
   <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase-firestore.js"></script>
   <script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-auth.js"></script>
   <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+  <script type='text/javascript' src='config.js'></script>
 
   <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.6.2/firebaseui.css" />
 
@@ -21,21 +22,11 @@
   <script>
   var app = Elm.Main.fullscreen();
 
-  var config = {
-    apiKey: "AIzaSyC8uV-2fN2TKfyn9Wijpksc_-0gUWpusxo",
-    authDomain: "tenk-ac696.firebaseapp.com",
-    databaseURL: "https://tenk-ac696.firebaseio.com",
-    projectId: "tenk-ac696",
-    storageBucket: "tenk-ac696.appspot.com",
-    messagingSenderId: "71540690911"
-  };
+
 
   firebase.initializeApp(config);
 
-      // FirebaseUI config.
-  var uiConfig = {
-    
-    };
+
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
       document.getElementById("firebaseui-auth-container").style.display = "none";
@@ -64,35 +55,7 @@
 
       }
     });
-    app.ports.newGoal.subscribe(function(createGoalArray){
-      var user = firebase.auth().currentUser;
-      x = Number(createGoalArray[1])
-      y = Number(createGoalArray[2])
-      console.log(createGoalArray[0],x,y, user.uid)
-      if (isNaN(x)) {
-        window.alert("Please make sure to only the numbers 0-9 when inputting the number of steps in your goal. You may use decimal places. You cannot use commas.")
-      } else if (isNaN(y)) {
-        window.alert("Please make sure to only the numbers 0-9 when inputting the number of steps you have taken. You may use decimal places. You cannot use commas.")
-      } else if (createGoalArray[0] == null) {
-        window.alert("Please include a name for your goal.")
-      }
-      else {
-        firebase.firestore().collection("Goals").add({
-            goalName: createGoalArray[0],
-            endGoal: x,
-            goalProgress: y,
-            addProgress: "0",
-            uid: user.uid
-        }).then(function(docRef) {
-            console.log("Document written with ID: ", docRef.id);
-            // todo: send this into elm and gui
-            })
-        .catch(function(error) {
-          // todo: send this into elm and gui
-            console.error("Error adding document: ", error);
-        });
-        }
-          });
+    
       app.ports.sendProgress.subscribe(function(addProgress){
         var user = firebase.auth().currentUser;
         newProgress = Number(addProgress[0]),
