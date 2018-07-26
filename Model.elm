@@ -3,9 +3,6 @@ module Model exposing (..)
 
 type alias Model =
     { currentUser : Maybe User
-    , newGoalName : Maybe String
-    , newEndGoal : Maybe String
-    , newGoalProgress : Maybe String
     , userGoals : Maybe (List Goal)
     , selectedGoalId : String
     , addProgress : String

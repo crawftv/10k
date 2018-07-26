@@ -8,7 +8,7 @@ import Html exposing (Html)
 import StyleSheets exposing (MyStyles, stylesheet)
 import AppNavBar
 import DesktopLandingPage
-import Model exposing (..)
+import Model exposing (User, Goal, Model)
 import Update exposing (..)
 
 
@@ -24,7 +24,7 @@ main =
 
 initModel : Model
 initModel =
-    (Model Nothing Nothing Nothing Nothing Nothing "" "")
+    (Model Nothing Nothing "" "")
 
 
 init : ( Model, Cmd Msg )
@@ -87,12 +87,17 @@ goalListView : Maybe (List Goal) -> Element MyStyles variation Msg
 goalListView userGoals =
     case userGoals of
         Nothing ->
-            el noStyle [] (text "No user goals")
+            el noStyle [] (text "Loading Goals")
 
         Just userGoals ->
-            userGoals
-                |> List.map goalIndividualView
-                |> Element.column noStyle [ Att.width (Att.percent 50), Att.spacing 20 ]
+            case userGoals of
+                [] ->
+                    el noStyle [] (text "No Goals")
+
+                _ ->
+                    userGoals
+                        |> List.map goalIndividualView
+                        |> Element.wrappedRow noStyle [ Att.width (Att.percent 50), Att.spacing 20, Att.center ]
 
 
 goalView : Model -> Element MyStyles variation Msg
@@ -102,7 +107,7 @@ goalView model =
 
 pageArea : Model -> Element MyStyles variation Msg
 pageArea model =
-    Element.column noStyle [ Att.spacing 10 ] [ AppNavBar.topBarView model, goalView model ]
+    Element.column noStyle [ Att.spacing 10 ] [ AppNavBar.topBarView model.currentUser, goalView model ]
 
 
 landingPageArea : Html Msg

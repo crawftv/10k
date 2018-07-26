@@ -48,7 +48,6 @@
             goalList.push(goal);
           });
             app.ports.loadGoals.send(goalList);
-            console.log(goalList);
           });
 
     } else {
@@ -69,7 +68,8 @@
         else {
           firebase.firestore().collection("Goals").doc(docId).update({
               goalProgress: (newProgress + currentProgress),
-              addProgress: "0",
+              addProgress: "",
+              lastUpdate : new Date()
           }).then(function() {
             // todo: send this into elm and gui
             firebase.firestore().collection("Goals").where("uid", "==", user.uid)
@@ -86,7 +86,7 @@
                   goalList.push(goal);
                 });
                   app.ports.loadGoals.send(goalList);
-                  console.log(goalList);
+                  console.log("loadGoals");
                 });
           })
           .catch(function(error) {

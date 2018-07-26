@@ -9,4 +9,5 @@ elm-stuff/
 elm-package.json
 .firebaserc
 .firebase.json
+config.js
 main.js

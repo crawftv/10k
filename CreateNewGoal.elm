@@ -10,6 +10,7 @@ import Element.Attributes as Att
 import Element.Events as Ev
 import Html exposing (Html)
 import Update exposing (loadUser)
+import AppNavBar exposing (topBarView)
 
 
 helpView : MyStyles
@@ -53,7 +54,12 @@ init =
 view : CNGModel -> Html Msg
 view model =
     Element.layout stylesheet <|
-        centerCreateGoalView model
+        cngPageArea model
+
+
+cngPageArea : CNGModel -> Element MyStyles variation Msg
+cngPageArea model =
+    Element.column noStyle [ Att.spacing 10 ] [ AppNavBar.topBarView model.currentUser, centerCreateGoalView model ]
 
 
 centerCreateGoalView : CNGModel -> Element MyStyles variation Msg
