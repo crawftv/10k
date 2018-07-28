@@ -10,6 +10,10 @@ helpView =
     StyleSheets.HelpView
 
 
+navView =
+    StyleSheets.NavView
+
+
 navBar : Maybe User -> Element MyStyles variation msg
 navBar user =
     case user of
@@ -20,30 +24,30 @@ navBar user =
                 , options =
                     [ link
                         "login.html"
-                        (el helpView [] (text "Login"))
+                        (button StyleSheets.ButtonView [] (text "Login"))
                       -- , link "/logout" (el helpView [] (text "logout"))
                     ]
                 }
 
         Just user ->
-            navigation helpView
-                [ Att.alignRight ]
+            navigation StyleSheets.NoStyle
+                [ Att.alignRight, Att.spacing 16 ]
                 { name = "Main Navigation"
                 , options =
-                    [ (el helpView [] (text user.email))
+                    [ (el navView [] (text user.email))
                     , link
                         "logout.html"
-                        (el helpView [] (text "logout"))
-                    , link "createNewGoal.html" (el helpView [] (text "Create new goal"))
+                        (button StyleSheets.ButtonView [] (text "Logout"))
+                    , link "createNewGoal.html" (button StyleSheets.ButtonView [] (text "Create New Goal"))
                     ]
                 }
 
 
-topBarView : Model -> Element MyStyles variation msg
-topBarView model =
-    Element.row helpView
-        []
-        [ el helpView [] (text "Small Logo Goes here")
-        , el helpView [ Att.width Att.fill ] (text "FinishYourGoals.com")
-        , navBar model.currentUser
+topBarView : Maybe User -> Element MyStyles variation msg
+topBarView user =
+    Element.row StyleSheets.TopBarStyle
+        [ Att.spacing 20 ]
+        [ el navView [] (text "Small Logo Goes here")
+        , el navView [ Att.width Att.fill ] (text "FinishYourGoals.com")
+        , navBar user
         ]

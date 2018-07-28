@@ -13,37 +13,36 @@ main =
     view
 
 
-helpView : MyStyles
-helpView =
-    StyleSheets.HelpView
+noStyle =
+    StyleSheets.NoStyle
 
 
 landingPageArea : Element MyStyles variation msg
 landingPageArea =
-    Element.wrappedColumn StyleSheets.HelpView
+    Element.wrappedColumn StyleSheets.PageStyle
         []
         [ LandingNavBar.topBarView
-        , Element.mainContent helpView [ Att.height (Att.px 500), Att.width (Att.fill) ] heroView
+        , Element.mainContent noStyle [ Att.height (Att.px 500), Att.width (Att.fill) ] heroView
         , el StyleSheets.ButtonView [ Att.height (Att.px 300) ] ctaView
-        , el helpView [ Att.height (Att.px 400) ] featureView
+        , el noStyle [ Att.height (Att.px 400) ] featureView
         , el StyleSheets.ButtonView [ Att.height (Att.px 300) ] ctaView
         ]
 
 
 heroView : Element MyStyles variation msg
 heroView =
-    Element.column helpView
-        [ Att.padding 10, Att.spacing 5, Att.height Att.fill ]
-        [ Element.h1 helpView [ Att.alignTop, Att.center ] (Element.bold "Tired of Quitting on Your Goals")
-        , Element.h2 helpView [ Att.alignTop, Att.center ] (text "Become Your Best Self with FinishYourGoals.com")
-        , Element.row helpView
+    Element.column noStyle
+        [ Att.spacing 5, Att.height Att.fill ]
+        [ Element.h1 StyleSheets.HeroHeaderStyle [ Att.alignTop, Att.center ] (Element.bold "Tired of Quitting on Your Goals")
+        , Element.h2 StyleSheets.HeroHeaderStyle [ Att.alignTop, Att.center ] (text "Become Your Best Self with FinishYourGoals.com")
+        , Element.wrappedRow StyleSheets.HeroRightStyle
             [ Att.center, Att.height Att.fill, Att.spacing 5 ]
-            [ el helpView [ Att.width Att.fill ] (text "image goes here")
-            , Element.column helpView
-                [ Att.verticalCenter, Att.width Att.fill, Att.spacing 20 ]
-                [ el helpView [] (text "We hold you accountable with constant check-ups.")
-                , el helpView [] (text "Personalized help creating actionable goals")
-                , el helpView [] (text "Start becoming an expert in what you've always wanted Today!")
+            [ el noStyle [ Att.width Att.fill ] (text "image goes here")
+            , Element.column noStyle
+                [ Att.verticalCenter, Att.width Att.fill, Att.spacing 50 ]
+                [ el noStyle [] (text "We hold you accountable with constant check-ups.")
+                , el noStyle [] (text "Personalized help creating actionable goals")
+                , el noStyle [] (text "Start becoming an expert in what you've always wanted Today!")
                 ]
             ]
         ]
@@ -56,7 +55,7 @@ ctaView =
 
 featureView : Element MyStyles variation msg
 featureView =
-    el helpView [ Att.center, Att.verticalCenter ] (text "Feature")
+    el noStyle [ Att.center, Att.verticalCenter ] (text "Feature")
 
 
 view : Html msg

@@ -6,6 +6,7 @@ import Style.Font as Font
 import Style.Border as Border
 import Color exposing (..)
 import Style.Background exposing (gradient, step)
+import Style.Background as Background
 
 
 type MyStyles
@@ -15,6 +16,11 @@ type MyStyles
     | CTAView
     | NavView
     | BorderView
+    | HeroRightStyle
+    | PageStyle
+    | IndividualGoalStyle
+    | HeroHeaderStyle
+    | TopBarStyle
     | Error
 
 
@@ -23,6 +29,14 @@ loadRoboto =
     Font.importUrl
         { url = "https://fonts.googleapis.com/css?family=Roboto"
         , name = "Roboto"
+        }
+
+
+loadOpenSans : Font
+loadOpenSans =
+    Font.importUrl
+        { url = "https://fonts.googleapis.com/css?family=Open+Sans"
+        , name = "Open Sans"
         }
 
 
@@ -36,13 +50,36 @@ stylesheet =
             , Color.border gray
             , Font.size 16
             , Font.center
-            , Font.typeface
-                [ Font.font "Roboto" ]
+            ]
+        , Style.style TopBarStyle
+            [ Color.background white
+            , Border.bottom 5
+            , Color.border (Color.rgb 51 122 183)
             ]
         , Style.style NavView
             [ Font.size 20
             , Font.typeface
-                [ Font.font "Roboto" ]
+                [ loadRoboto ]
+            ]
+        , Style.style IndividualGoalStyle
+            [ Border.all 1
+            , Border.rounded 5
+            , Color.border (Color.rgb 51 122 183)
+            , Color.background white
+            , Font.typeface [ loadOpenSans ]
+            ]
+        , Style.style HeroRightStyle
+            [ Border.all 1
+            , Border.rounded 5
+            , Color.border (Color.rgb 51 122 183)
+            , Font.size 20
+            , Font.typeface
+                [ loadOpenSans ]
+            ]
+        , Style.style HeroHeaderStyle
+            [ Font.size 24
+            , Font.typeface
+                [ loadRoboto ]
             ]
         , Style.style BorderView
             [ Border.all 1
@@ -52,14 +89,17 @@ stylesheet =
             , Color.text white
             , Font.size 24
             , Font.typeface
-                [ Font.font "Roboto" ]
+                [ loadRoboto ]
+            , Border.rounded 5
             ]
+        , Style.style PageStyle
+            []
         , Style.style CTAView
             [ Color.background red
             , Color.text white
             , Font.size 24
             , Font.typeface
-                [ Font.font "Roboto" ]
+                [ loadRoboto ]
             ]
         , Style.style Error
             [ Color.text Color.red

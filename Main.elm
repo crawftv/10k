@@ -42,30 +42,30 @@ noStyle =
 
 goalIndividualView : Goal -> Element MyStyles variation Msg
 goalIndividualView goal =
-    Element.column helpView
-        []
-        [ Element.row helpView
+    Element.column StyleSheets.IndividualGoalStyle
+        [ Att.paddingTop 10, Att.spacing 10 ]
+        [ Element.row noStyle
             []
-            [ el helpView [ Att.width (Att.percent 50) ] (text "Goal Name: ")
-            , el helpView [ Att.width (Att.percent 50) ] (text goal.goalName)
+            [ el noStyle [ Att.width (Att.percent 50) ] (text "Goal Name: ")
+            , el noStyle [ Att.width (Att.percent 50) ] (text goal.goalName)
             ]
-        , Element.row helpView
+        , Element.row noStyle
             []
-            [ el helpView [ Att.width (Att.percent 50) ] (text "Goal Progress: ")
-            , el helpView [ Att.width (Att.percent 50) ] (text (toString goal.progress))
+            [ el noStyle [ Att.width (Att.percent 50) ] (text "Goal Progress: ")
+            , el noStyle [ Att.width (Att.percent 50) ] (text (toString goal.progress))
             ]
-        , Element.row helpView
+        , Element.row noStyle
             []
-            [ el helpView [ Att.width (Att.percent 50) ] (text "End Goal: ")
-            , el helpView [ Att.width (Att.percent 50) ] (text (toString goal.endGoal))
+            [ el noStyle [ Att.width (Att.percent 50) ] (text "End Goal: ")
+            , el noStyle [ Att.width (Att.percent 50) ] (text (toString goal.endGoal))
             ]
-        , Input.text helpView
-            [ Att.width (Att.percent 50) ]
+        , Input.text StyleSheets.IndividualGoalStyle
+            [ Att.width (Att.percent 50), Att.paddingBottom 5 ]
             { onChange = AddProgress
             , value = goal.addProgress
             , label =
                 Input.placeholder
-                    { label = Input.labelLeft (el helpView [ Att.width (Att.percent 50) ] (text "Update this goal?: "))
+                    { label = Input.labelLeft (el noStyle [ Att.width (Att.percent 50) ] (text "Update this goal?: "))
                     , text = ""
                     }
             , options =
@@ -78,8 +78,8 @@ goalIndividualView goal =
 
 selectGoalButton : Goal -> Element MyStyles variation Msg
 selectGoalButton currentGoal =
-    button helpView
-        [ Att.height (Att.px 25), (Ev.onClick (SendProgress ( currentGoal.fireStoreValue, currentGoal.progress ))) ]
+    button StyleSheets.ButtonView
+        [ Att.height (Att.px 40), (Ev.onClick (SendProgress ( currentGoal.fireStoreValue, currentGoal.progress ))) ]
         (text "update this goal")
 
 
@@ -97,17 +97,17 @@ goalListView userGoals =
                 _ ->
                     userGoals
                         |> List.map goalIndividualView
-                        |> Element.wrappedRow noStyle [ Att.width (Att.percent 50), Att.spacing 20, Att.center ]
+                        |> Element.wrappedRow noStyle [ Att.width (Att.percent 75), Att.spacing 20, Att.center ]
 
 
 goalView : Model -> Element MyStyles variation Msg
 goalView model =
-    Element.column noStyle [ Att.center ] [ goalListView model.userGoals ]
+    Element.column noStyle [ Att.center, Att.height (Att.percent 100) ] [ goalListView model.userGoals ]
 
 
 pageArea : Model -> Element MyStyles variation Msg
 pageArea model =
-    Element.column noStyle [ Att.spacing 10 ] [ AppNavBar.topBarView model.currentUser, goalView model ]
+    Element.column StyleSheets.PageStyle [ Att.spacing 10 ] [ AppNavBar.topBarView model.currentUser, goalView model ]
 
 
 landingPageArea : Html Msg

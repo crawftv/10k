@@ -64,13 +64,13 @@ cngPageArea model =
 
 centerCreateGoalView : CNGModel -> Element MyStyles variation Msg
 centerCreateGoalView model =
-    el helpView [ Att.center, Att.width (Att.percent 50) ] (createGoalView model)
+    el noStyle [ Att.center, Att.width (Att.percent 50) ] (createGoalView model)
 
 
 createGoalView : CNGModel -> Element MyStyles variation Msg
 createGoalView model =
-    Element.column helpView
-        []
+    Element.column StyleSheets.IndividualGoalStyle
+        [ Att.paddingTop 5, Att.spacing 5 ]
         [ createGoalNameView model.newGoalName
         , createEndGoalView model.newEndGoal
         , createGoalProgressView model.newGoalProgress
@@ -80,7 +80,7 @@ createGoalView model =
 
 createGoalNameView : Maybe String -> Element MyStyles variation Msg
 createGoalNameView newGoalName =
-    Input.text helpView
+    Input.text StyleSheets.IndividualGoalStyle
         [ Att.width (Att.percent 50) ]
         { onChange = NewGoalName
         , value =
@@ -92,7 +92,7 @@ createGoalNameView newGoalName =
                     newGoalName
         , label =
             Input.placeholder
-                { label = Input.labelLeft (el helpView [ Att.width (Att.percent 50) ] (text "Goal Name: "))
+                { label = Input.labelLeft (el noStyle [ Att.width (Att.percent 50) ] (text "Goal Name: "))
                 , text = "Placeholder!"
                 }
         , options =
@@ -103,7 +103,7 @@ createGoalNameView newGoalName =
 
 createEndGoalView : Maybe String -> Element MyStyles variation Msg
 createEndGoalView newEndGoal =
-    Input.text helpView
+    Input.text StyleSheets.IndividualGoalStyle
         [ Att.width (Att.percent 50) ]
         { onChange = NewEndGoal
         , value =
@@ -115,7 +115,7 @@ createEndGoalView newEndGoal =
                     newEndGoal
         , label =
             Input.placeholder
-                { label = Input.labelLeft (el helpView [ Att.width (Att.percent 50) ] (text "How many steps is this goal?: "))
+                { label = Input.labelLeft (el noStyle [ Att.width (Att.percent 50) ] (text "How many steps is this goal?: "))
                 , text = "10,000"
                 }
         , options =
@@ -126,7 +126,7 @@ createEndGoalView newEndGoal =
 
 createGoalProgressView : Maybe String -> Element MyStyles variation Msg
 createGoalProgressView newGoalProgress =
-    Input.text helpView
+    Input.text StyleSheets.IndividualGoalStyle
         [ Att.width (Att.percent 50) ]
         { onChange = NewGoalProgress
         , value =
@@ -138,7 +138,7 @@ createGoalProgressView newGoalProgress =
                     newGoalProgess
         , label =
             Input.placeholder
-                { label = Input.labelLeft (el helpView [ Att.width (Att.percent 50) ] (text "How many steps have you taken on this goal?: "))
+                { label = Input.labelLeft (el noStyle [ Att.width (Att.percent 50) ] (text "How many steps have you taken on this goal?: "))
                 , text = "0"
                 }
         , options =
@@ -176,7 +176,7 @@ update msg model =
 
 createGoalSubmit : Element MyStyles variation Msg
 createGoalSubmit =
-    button helpView
+    button StyleSheets.ButtonView
         [ Att.height (Att.px 25), (Ev.onClick SendNewGoal) ]
         (text "Create New Goal")
 
