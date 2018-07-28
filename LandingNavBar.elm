@@ -5,18 +5,22 @@ import Element.Attributes as Att
 import StyleSheets exposing (MyStyles, stylesheet)
 
 
-helpView =
-    StyleSheets.HelpView
+navView =
+    StyleSheets.NavView
+
+
+noStyle =
+    StyleSheets.NoStyle
 
 
 navBar =
-    navigation helpView
+    navigation navView
         []
         { name = "Main Navigation"
         , options =
             [ link
                 "login.html"
-                (el StyleSheets.ButtonView [] (text "Sign in to Get Started"))
+                (button StyleSheets.ButtonView [] (text "Sign in to Get Started"))
               -- , link "/logout" (el helpView [] (text "logout"))
             ]
         }
@@ -24,9 +28,9 @@ navBar =
 
 topBarView : Element MyStyles variation msg
 topBarView =
-    Element.row helpView
+    Element.row StyleSheets.TopBarStyle
         [ Att.spacing 10 ]
-        [ el helpView [] (text "Small Logo Goes here")
-        , el helpView [ Att.width Att.fill ] (text "FinishYourGoals.com")
+        [ el navView [] (text "Small Logo Goes here")
+        , el navView [ Att.width Att.fill ] (text "FinishYourGoals.com")
         , navBar
         ]
