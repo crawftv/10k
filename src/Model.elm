@@ -21,6 +21,8 @@ type alias Goal =
     , progress : Float
     , fireStoreValue : String
     , addProgress : String
+    , dateCreated : String
+    , lastUpdate : String
     }
 
 

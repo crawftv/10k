@@ -45,6 +45,8 @@
             goal.progress = doc.data().goalProgress;
             goal.fireStoreValue = doc.id;
             goal.addProgress = doc.data().addProgress;
+            goal.dateCreated = doc.data().dateCreated.toString();
+            goal.lastUpdate = doc.data().lastUpdate.toString();
             goalList.push(goal);
           });
             app.ports.loadGoals.send(goalList);

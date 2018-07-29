@@ -51,6 +51,16 @@ goalIndividualView goal =
             ]
         , Element.row noStyle
             []
+            [ el noStyle [ Att.width (Att.percent 50) ] (text "Date Created ")
+            , el noStyle [ Att.width (Att.percent 50) ] (text goal.dateCreated)
+            ]
+        , Element.row noStyle
+            []
+            [ el noStyle [ Att.width (Att.percent 50) ] (text "Last Updated: ")
+            , el noStyle [ Att.width (Att.percent 50) ] (text goal.lastUpdate)
+            ]
+        , Element.row noStyle
+            []
             [ el noStyle [ Att.width (Att.percent 50) ] (text "Goal Progress: ")
             , el noStyle [ Att.width (Att.percent 50) ] (text (toString goal.progress))
             ]

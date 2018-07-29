@@ -23,9 +23,9 @@ landingPageArea =
         []
         [ LandingNavBar.topBarView
         , Element.mainContent noStyle [ Att.height (Att.px 500), Att.width (Att.fill) ] heroView
-        , el StyleSheets.ButtonView [ Att.height (Att.px 300) ] ctaView
+        , el StyleSheets.ButtonView [ Att.height (Att.px 300) ] (ctaView "Sign-up! and Get Started Today!")
         , el noStyle [ Att.height (Att.px 400) ] featureView
-        , el StyleSheets.ButtonView [ Att.height (Att.px 300) ] ctaView
+        , el StyleSheets.ButtonView [ Att.height (Att.px 300) ] (ctaView "This offer is limited to 200 motivated people Sign-up to get a spot!")
         ]
 
 
@@ -48,9 +48,9 @@ heroView =
         ]
 
 
-ctaView : Element MyStyles variation msg
-ctaView =
-    el StyleSheets.CTAView [ Att.center, Att.verticalCenter ] (text "Click to Sign-up with email and get started today!")
+ctaView : String -> Element MyStyles variation msg
+ctaView string =
+    el StyleSheets.CTAView [ Att.center, Att.verticalCenter ] (text string)
 
 
 featureView : Element MyStyles variation msg

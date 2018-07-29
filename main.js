@@ -22779,6 +22779,186 @@ var _mdgriffith$style_elements$Element_Input$select = F3(
 		}
 	});
 
+var _mdgriffith$style_elements$Style_Background$noRepeat = _mdgriffith$style_elements$Style_Internal_Model$NoRepeat;
+var _mdgriffith$style_elements$Style_Background$stretch = _mdgriffith$style_elements$Style_Internal_Model$Round;
+var _mdgriffith$style_elements$Style_Background$space = _mdgriffith$style_elements$Style_Internal_Model$Space;
+var _mdgriffith$style_elements$Style_Background$repeat = _mdgriffith$style_elements$Style_Internal_Model$Repeat;
+var _mdgriffith$style_elements$Style_Background$repeatY = _mdgriffith$style_elements$Style_Internal_Model$RepeatY;
+var _mdgriffith$style_elements$Style_Background$repeatX = _mdgriffith$style_elements$Style_Internal_Model$RepeatX;
+var _mdgriffith$style_elements$Style_Background$imageWith = function (attrs) {
+	return _mdgriffith$style_elements$Style_Internal_Model$Background(
+		_mdgriffith$style_elements$Style_Internal_Model$BackgroundImage(attrs));
+};
+var _mdgriffith$style_elements$Style_Background$size = _mdgriffith$style_elements$Style_Internal_Model$BackgroundSize;
+var _mdgriffith$style_elements$Style_Background$height = _mdgriffith$style_elements$Style_Internal_Model$BackgroundHeight;
+var _mdgriffith$style_elements$Style_Background$width = _mdgriffith$style_elements$Style_Internal_Model$BackgroundWidth;
+var _mdgriffith$style_elements$Style_Background$natural = _mdgriffith$style_elements$Style_Background$size(
+	{height: _mdgriffith$style_elements$Style_Internal_Model$Auto, width: _mdgriffith$style_elements$Style_Internal_Model$Auto});
+var _mdgriffith$style_elements$Style_Background$cover = _mdgriffith$style_elements$Style_Internal_Model$Cover;
+var _mdgriffith$style_elements$Style_Background$contain = _mdgriffith$style_elements$Style_Internal_Model$Contain;
+var _mdgriffith$style_elements$Style_Background$coverImage = function (src) {
+	return _mdgriffith$style_elements$Style_Internal_Model$Background(
+		_mdgriffith$style_elements$Style_Internal_Model$BackgroundImage(
+			{
+				src: src,
+				position: {ctor: '_Tuple2', _0: 0, _1: 0},
+				repeat: _mdgriffith$style_elements$Style_Background$noRepeat,
+				size: _mdgriffith$style_elements$Style_Background$cover
+			}));
+};
+var _mdgriffith$style_elements$Style_Background$image = function (src) {
+	return _mdgriffith$style_elements$Style_Internal_Model$Background(
+		_mdgriffith$style_elements$Style_Internal_Model$BackgroundImage(
+			{
+				src: src,
+				position: {ctor: '_Tuple2', _0: 0, _1: 0},
+				repeat: _mdgriffith$style_elements$Style_Background$noRepeat,
+				size: _mdgriffith$style_elements$Style_Background$natural
+			}));
+};
+var _mdgriffith$style_elements$Style_Background$gradientBottomLeft = function (steps) {
+	return _mdgriffith$style_elements$Style_Internal_Model$Background(
+		A2(_mdgriffith$style_elements$Style_Internal_Model$BackgroundLinearGradient, _mdgriffith$style_elements$Style_Internal_Model$ToBottomLeft, steps));
+};
+var _mdgriffith$style_elements$Style_Background$gradientTopLeft = function (steps) {
+	return _mdgriffith$style_elements$Style_Internal_Model$Background(
+		A2(_mdgriffith$style_elements$Style_Internal_Model$BackgroundLinearGradient, _mdgriffith$style_elements$Style_Internal_Model$ToTopLeft, steps));
+};
+var _mdgriffith$style_elements$Style_Background$gradientLeft = function (steps) {
+	return _mdgriffith$style_elements$Style_Internal_Model$Background(
+		A2(_mdgriffith$style_elements$Style_Internal_Model$BackgroundLinearGradient, _mdgriffith$style_elements$Style_Internal_Model$ToLeft, steps));
+};
+var _mdgriffith$style_elements$Style_Background$gradientBottomRight = function (steps) {
+	return _mdgriffith$style_elements$Style_Internal_Model$Background(
+		A2(_mdgriffith$style_elements$Style_Internal_Model$BackgroundLinearGradient, _mdgriffith$style_elements$Style_Internal_Model$ToBottomRight, steps));
+};
+var _mdgriffith$style_elements$Style_Background$gradientTopRight = function (steps) {
+	return _mdgriffith$style_elements$Style_Internal_Model$Background(
+		A2(_mdgriffith$style_elements$Style_Internal_Model$BackgroundLinearGradient, _mdgriffith$style_elements$Style_Internal_Model$ToTopRight, steps));
+};
+var _mdgriffith$style_elements$Style_Background$gradientRight = function (steps) {
+	return _mdgriffith$style_elements$Style_Internal_Model$Background(
+		A2(_mdgriffith$style_elements$Style_Internal_Model$BackgroundLinearGradient, _mdgriffith$style_elements$Style_Internal_Model$ToRight, steps));
+};
+var _mdgriffith$style_elements$Style_Background$gradientDown = function (steps) {
+	return _mdgriffith$style_elements$Style_Internal_Model$Background(
+		A2(_mdgriffith$style_elements$Style_Internal_Model$BackgroundLinearGradient, _mdgriffith$style_elements$Style_Internal_Model$ToDown, steps));
+};
+var _mdgriffith$style_elements$Style_Background$gradientUp = function (steps) {
+	return _mdgriffith$style_elements$Style_Internal_Model$Background(
+		A2(_mdgriffith$style_elements$Style_Internal_Model$BackgroundLinearGradient, _mdgriffith$style_elements$Style_Internal_Model$ToUp, steps));
+};
+var _mdgriffith$style_elements$Style_Background$gradient = F2(
+	function (angle, steps) {
+		return _mdgriffith$style_elements$Style_Internal_Model$Background(
+			A2(
+				_mdgriffith$style_elements$Style_Internal_Model$BackgroundLinearGradient,
+				_mdgriffith$style_elements$Style_Internal_Model$ToAngle(angle),
+				steps));
+	});
+var _mdgriffith$style_elements$Style_Background$px = F2(
+	function (p, c) {
+		return A2(_mdgriffith$style_elements$Style_Internal_Model$PxStep, c, p);
+	});
+var _mdgriffith$style_elements$Style_Background$percent = F2(
+	function (p, c) {
+		return A2(_mdgriffith$style_elements$Style_Internal_Model$PercentStep, c, p);
+	});
+var _mdgriffith$style_elements$Style_Background$step = _mdgriffith$style_elements$Style_Internal_Model$ColorStep;
+
+var _mdgriffith$style_elements$Style_Border$roundBottomLeft = function (x) {
+	return A2(
+		_mdgriffith$style_elements$Style_Internal_Model$Exact,
+		'border-bottom-left-radius',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(x),
+			'px'));
+};
+var _mdgriffith$style_elements$Style_Border$roundBottomRight = function (x) {
+	return A2(
+		_mdgriffith$style_elements$Style_Internal_Model$Exact,
+		'border-bottom-right-radius',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(x),
+			'px'));
+};
+var _mdgriffith$style_elements$Style_Border$roundTopRight = function (x) {
+	return A2(
+		_mdgriffith$style_elements$Style_Internal_Model$Exact,
+		'border-top-right-radius',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(x),
+			'px'));
+};
+var _mdgriffith$style_elements$Style_Border$roundTopLeft = function (x) {
+	return A2(
+		_mdgriffith$style_elements$Style_Internal_Model$Exact,
+		'border-top-left-radius',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(x),
+			'px'));
+};
+var _mdgriffith$style_elements$Style_Border$rounded = function (box) {
+	return A2(
+		_mdgriffith$style_elements$Style_Internal_Model$Exact,
+		'border-radius',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(box),
+			'px'));
+};
+var _mdgriffith$style_elements$Style_Border$dotted = A2(_mdgriffith$style_elements$Style_Internal_Model$Exact, 'border-style', 'dotted');
+var _mdgriffith$style_elements$Style_Border$dashed = A2(_mdgriffith$style_elements$Style_Internal_Model$Exact, 'border-style', 'dashed');
+var _mdgriffith$style_elements$Style_Border$solid = A2(_mdgriffith$style_elements$Style_Internal_Model$Exact, 'border-style', 'solid');
+var _mdgriffith$style_elements$Style_Border$none = A2(_mdgriffith$style_elements$Style_Internal_Model$Exact, 'border-width', '0');
+var _mdgriffith$style_elements$Style_Border$bottom = function (l) {
+	return A2(
+		_mdgriffith$style_elements$Style_Internal_Model$Exact,
+		'border-bottom-width',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(l),
+			'px'));
+};
+var _mdgriffith$style_elements$Style_Border$top = function (l) {
+	return A2(
+		_mdgriffith$style_elements$Style_Internal_Model$Exact,
+		'border-top-width',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(l),
+			'px'));
+};
+var _mdgriffith$style_elements$Style_Border$right = function (l) {
+	return A2(
+		_mdgriffith$style_elements$Style_Internal_Model$Exact,
+		'border-right-width',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(l),
+			'px'));
+};
+var _mdgriffith$style_elements$Style_Border$left = function (l) {
+	return A2(
+		_mdgriffith$style_elements$Style_Internal_Model$Exact,
+		'border-left-width',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(l),
+			'px'));
+};
+var _mdgriffith$style_elements$Style_Border$all = function (v) {
+	return A2(
+		_mdgriffith$style_elements$Style_Internal_Model$Exact,
+		'border-width',
+		_mdgriffith$style_elements$Style_Internal_Render_Value$box(
+			{ctor: '_Tuple4', _0: v, _1: v, _2: v, _3: v}));
+};
+
 var _mdgriffith$style_elements$Style_Color$placeholder = function (clr) {
 	return A2(
 		_mdgriffith$style_elements$Style_Internal_Model$PseudoElement,
@@ -22888,7 +23068,397 @@ var _mdgriffith$style_elements$Style_Font$typeface = function (families) {
 	return _mdgriffith$style_elements$Style_Internal_Model$FontFamily(families);
 };
 
-var _user$project$Main$loadUser = _elm_lang$core$Native_Platform.incomingPort(
+var _user$project$StyleSheets$loadOpenSans = _mdgriffith$style_elements$Style_Font$importUrl(
+	{url: 'https://fonts.googleapis.com/css?family=Open+Sans', name: 'Open Sans'});
+var _user$project$StyleSheets$loadRoboto = _mdgriffith$style_elements$Style_Font$importUrl(
+	{url: 'https://fonts.googleapis.com/css?family=Roboto', name: 'Roboto'});
+var _user$project$StyleSheets$Error = {ctor: 'Error'};
+var _user$project$StyleSheets$TopBarStyle = {ctor: 'TopBarStyle'};
+var _user$project$StyleSheets$HeroHeaderStyle = {ctor: 'HeroHeaderStyle'};
+var _user$project$StyleSheets$IndividualGoalStyle = {ctor: 'IndividualGoalStyle'};
+var _user$project$StyleSheets$PageStyle = {ctor: 'PageStyle'};
+var _user$project$StyleSheets$HeroRightStyle = {ctor: 'HeroRightStyle'};
+var _user$project$StyleSheets$BorderView = {ctor: 'BorderView'};
+var _user$project$StyleSheets$NavView = {ctor: 'NavView'};
+var _user$project$StyleSheets$CTAView = {ctor: 'CTAView'};
+var _user$project$StyleSheets$ButtonView = {ctor: 'ButtonView'};
+var _user$project$StyleSheets$HelpView = {ctor: 'HelpView'};
+var _user$project$StyleSheets$NoStyle = {ctor: 'NoStyle'};
+var _user$project$StyleSheets$stylesheet = _mdgriffith$style_elements$Style$styleSheet(
+	{
+		ctor: '::',
+		_0: A2(
+			_mdgriffith$style_elements$Style$style,
+			_user$project$StyleSheets$NoStyle,
+			{ctor: '[]'}),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_mdgriffith$style_elements$Style$style,
+				_user$project$StyleSheets$HelpView,
+				{
+					ctor: '::',
+					_0: _mdgriffith$style_elements$Style_Border$all(1),
+					_1: {
+						ctor: '::',
+						_0: _mdgriffith$style_elements$Style_Color$border(_elm_lang$core$Color$gray),
+						_1: {
+							ctor: '::',
+							_0: _mdgriffith$style_elements$Style_Font$size(16),
+							_1: {
+								ctor: '::',
+								_0: _mdgriffith$style_elements$Style_Font$center,
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_mdgriffith$style_elements$Style$style,
+					_user$project$StyleSheets$TopBarStyle,
+					{
+						ctor: '::',
+						_0: _mdgriffith$style_elements$Style_Color$background(_elm_lang$core$Color$white),
+						_1: {
+							ctor: '::',
+							_0: _mdgriffith$style_elements$Style_Border$bottom(5),
+							_1: {
+								ctor: '::',
+								_0: _mdgriffith$style_elements$Style_Color$border(
+									A3(_elm_lang$core$Color$rgb, 51, 122, 183)),
+								_1: {ctor: '[]'}
+							}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_mdgriffith$style_elements$Style$style,
+						_user$project$StyleSheets$NavView,
+						{
+							ctor: '::',
+							_0: _mdgriffith$style_elements$Style_Font$size(20),
+							_1: {
+								ctor: '::',
+								_0: _mdgriffith$style_elements$Style_Font$typeface(
+									{
+										ctor: '::',
+										_0: _user$project$StyleSheets$loadRoboto,
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_mdgriffith$style_elements$Style$style,
+							_user$project$StyleSheets$IndividualGoalStyle,
+							{
+								ctor: '::',
+								_0: _mdgriffith$style_elements$Style_Border$all(1),
+								_1: {
+									ctor: '::',
+									_0: _mdgriffith$style_elements$Style_Border$rounded(5),
+									_1: {
+										ctor: '::',
+										_0: _mdgriffith$style_elements$Style_Color$border(
+											A3(_elm_lang$core$Color$rgb, 51, 122, 183)),
+										_1: {
+											ctor: '::',
+											_0: _mdgriffith$style_elements$Style_Color$background(_elm_lang$core$Color$white),
+											_1: {
+												ctor: '::',
+												_0: _mdgriffith$style_elements$Style_Font$typeface(
+													{
+														ctor: '::',
+														_0: _user$project$StyleSheets$loadOpenSans,
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_mdgriffith$style_elements$Style$style,
+								_user$project$StyleSheets$HeroRightStyle,
+								{
+									ctor: '::',
+									_0: _mdgriffith$style_elements$Style_Border$all(1),
+									_1: {
+										ctor: '::',
+										_0: _mdgriffith$style_elements$Style_Border$rounded(5),
+										_1: {
+											ctor: '::',
+											_0: _mdgriffith$style_elements$Style_Color$border(
+												A3(_elm_lang$core$Color$rgb, 51, 122, 183)),
+											_1: {
+												ctor: '::',
+												_0: _mdgriffith$style_elements$Style_Font$size(20),
+												_1: {
+													ctor: '::',
+													_0: _mdgriffith$style_elements$Style_Font$typeface(
+														{
+															ctor: '::',
+															_0: _user$project$StyleSheets$loadOpenSans,
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_mdgriffith$style_elements$Style$style,
+									_user$project$StyleSheets$HeroHeaderStyle,
+									{
+										ctor: '::',
+										_0: _mdgriffith$style_elements$Style_Font$size(24),
+										_1: {
+											ctor: '::',
+											_0: _mdgriffith$style_elements$Style_Font$typeface(
+												{
+													ctor: '::',
+													_0: _user$project$StyleSheets$loadRoboto,
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_mdgriffith$style_elements$Style$style,
+										_user$project$StyleSheets$BorderView,
+										{
+											ctor: '::',
+											_0: _mdgriffith$style_elements$Style_Border$all(1),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_mdgriffith$style_elements$Style$style,
+											_user$project$StyleSheets$ButtonView,
+											{
+												ctor: '::',
+												_0: _mdgriffith$style_elements$Style_Color$background(_elm_lang$core$Color$red),
+												_1: {
+													ctor: '::',
+													_0: _mdgriffith$style_elements$Style_Color$text(_elm_lang$core$Color$white),
+													_1: {
+														ctor: '::',
+														_0: _mdgriffith$style_elements$Style_Font$size(24),
+														_1: {
+															ctor: '::',
+															_0: _mdgriffith$style_elements$Style_Font$typeface(
+																{
+																	ctor: '::',
+																	_0: _user$project$StyleSheets$loadRoboto,
+																	_1: {ctor: '[]'}
+																}),
+															_1: {
+																ctor: '::',
+																_0: _mdgriffith$style_elements$Style_Border$rounded(5),
+																_1: {ctor: '[]'}
+															}
+														}
+													}
+												}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_mdgriffith$style_elements$Style$style,
+												_user$project$StyleSheets$PageStyle,
+												{ctor: '[]'}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_mdgriffith$style_elements$Style$style,
+													_user$project$StyleSheets$CTAView,
+													{
+														ctor: '::',
+														_0: _mdgriffith$style_elements$Style_Color$background(_elm_lang$core$Color$red),
+														_1: {
+															ctor: '::',
+															_0: _mdgriffith$style_elements$Style_Color$text(_elm_lang$core$Color$white),
+															_1: {
+																ctor: '::',
+																_0: _mdgriffith$style_elements$Style_Font$size(24),
+																_1: {
+																	ctor: '::',
+																	_0: _mdgriffith$style_elements$Style_Font$typeface(
+																		{
+																			ctor: '::',
+																			_0: _user$project$StyleSheets$loadRoboto,
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {ctor: '[]'}
+																}
+															}
+														}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_mdgriffith$style_elements$Style$style,
+														_user$project$StyleSheets$Error,
+														{
+															ctor: '::',
+															_0: _mdgriffith$style_elements$Style_Color$text(_elm_lang$core$Color$red),
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	});
+
+var _user$project$Model$Model = F4(
+	function (a, b, c, d) {
+		return {currentUser: a, userGoals: b, selectedGoalId: c, addProgress: d};
+	});
+var _user$project$Model$User = F2(
+	function (a, b) {
+		return {email: a, uid: b};
+	});
+var _user$project$Model$Goal = F7(
+	function (a, b, c, d, e, f, g) {
+		return {goalName: a, endGoal: b, progress: c, fireStoreValue: d, addProgress: e, dateCreated: f, lastUpdate: g};
+	});
+var _user$project$Model$CNGModel = F4(
+	function (a, b, c, d) {
+		return {currentUser: a, newGoalName: b, newEndGoal: c, newGoalProgress: d};
+	});
+
+var _user$project$AppNavBar$navView = _user$project$StyleSheets$NavView;
+var _user$project$AppNavBar$helpView = _user$project$StyleSheets$HelpView;
+var _user$project$AppNavBar$navBar = function (user) {
+	var _p0 = user;
+	if (_p0.ctor === 'Nothing') {
+		return A3(
+			_mdgriffith$style_elements$Element$navigation,
+			_user$project$AppNavBar$helpView,
+			{ctor: '[]'},
+			{
+				name: 'Main Navigation',
+				options: {
+					ctor: '::',
+					_0: A2(
+						_mdgriffith$style_elements$Element$link,
+						'login.html',
+						A3(
+							_mdgriffith$style_elements$Element$button,
+							_user$project$StyleSheets$ButtonView,
+							{ctor: '[]'},
+							_mdgriffith$style_elements$Element$text('Login'))),
+					_1: {ctor: '[]'}
+				}
+			});
+	} else {
+		return A3(
+			_mdgriffith$style_elements$Element$navigation,
+			_user$project$StyleSheets$NoStyle,
+			{
+				ctor: '::',
+				_0: _mdgriffith$style_elements$Element_Attributes$alignRight,
+				_1: {
+					ctor: '::',
+					_0: _mdgriffith$style_elements$Element_Attributes$spacing(16),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				name: 'Main Navigation',
+				options: {
+					ctor: '::',
+					_0: A3(
+						_mdgriffith$style_elements$Element$el,
+						_user$project$AppNavBar$navView,
+						{ctor: '[]'},
+						_mdgriffith$style_elements$Element$text(_p0._0.email)),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_mdgriffith$style_elements$Element$link,
+							'logout.html',
+							A3(
+								_mdgriffith$style_elements$Element$button,
+								_user$project$StyleSheets$ButtonView,
+								{ctor: '[]'},
+								_mdgriffith$style_elements$Element$text('Logout'))),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_mdgriffith$style_elements$Element$link,
+								'createNewGoal.html',
+								A3(
+									_mdgriffith$style_elements$Element$button,
+									_user$project$StyleSheets$ButtonView,
+									{ctor: '[]'},
+									_mdgriffith$style_elements$Element$text('Create New Goal'))),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			});
+	}
+};
+var _user$project$AppNavBar$topBarView = function (user) {
+	return A3(
+		_mdgriffith$style_elements$Element$row,
+		_user$project$StyleSheets$TopBarStyle,
+		{
+			ctor: '::',
+			_0: _mdgriffith$style_elements$Element_Attributes$spacing(20),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A3(
+				_mdgriffith$style_elements$Element$el,
+				_user$project$AppNavBar$navView,
+				{ctor: '[]'},
+				_mdgriffith$style_elements$Element$text('Small Logo Goes here')),
+			_1: {
+				ctor: '::',
+				_0: A3(
+					_mdgriffith$style_elements$Element$el,
+					_user$project$AppNavBar$navView,
+					{
+						ctor: '::',
+						_0: _mdgriffith$style_elements$Element_Attributes$width(_mdgriffith$style_elements$Element_Attributes$fill),
+						_1: {ctor: '[]'}
+					},
+					_mdgriffith$style_elements$Element$text('FinishYourGoals.com')),
+				_1: {
+					ctor: '::',
+					_0: _user$project$AppNavBar$navBar(user),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+
+var _user$project$Update$loadUser = _elm_lang$core$Native_Platform.incomingPort(
 	'loadUser',
 	A2(
 		_elm_lang$core$Json_Decode$andThen,
@@ -22902,7 +23472,141 @@ var _user$project$Main$loadUser = _elm_lang$core$Native_Platform.incomingPort(
 				A2(_elm_lang$core$Json_Decode$field, 'uid', _elm_lang$core$Json_Decode$string));
 		},
 		A2(_elm_lang$core$Json_Decode$field, 'email', _elm_lang$core$Json_Decode$string)));
-var _user$project$Main$newGoal = _elm_lang$core$Native_Platform.outgoingPort(
+var _user$project$Update$loadGoals = _elm_lang$core$Native_Platform.incomingPort(
+	'loadGoals',
+	_elm_lang$core$Json_Decode$list(
+		A2(
+			_elm_lang$core$Json_Decode$andThen,
+			function (goalName) {
+				return A2(
+					_elm_lang$core$Json_Decode$andThen,
+					function (endGoal) {
+						return A2(
+							_elm_lang$core$Json_Decode$andThen,
+							function (progress) {
+								return A2(
+									_elm_lang$core$Json_Decode$andThen,
+									function (fireStoreValue) {
+										return A2(
+											_elm_lang$core$Json_Decode$andThen,
+											function (addProgress) {
+												return A2(
+													_elm_lang$core$Json_Decode$andThen,
+													function (dateCreated) {
+														return A2(
+															_elm_lang$core$Json_Decode$andThen,
+															function (lastUpdate) {
+																return _elm_lang$core$Json_Decode$succeed(
+																	{goalName: goalName, endGoal: endGoal, progress: progress, fireStoreValue: fireStoreValue, addProgress: addProgress, dateCreated: dateCreated, lastUpdate: lastUpdate});
+															},
+															A2(_elm_lang$core$Json_Decode$field, 'lastUpdate', _elm_lang$core$Json_Decode$string));
+													},
+													A2(_elm_lang$core$Json_Decode$field, 'dateCreated', _elm_lang$core$Json_Decode$string));
+											},
+											A2(_elm_lang$core$Json_Decode$field, 'addProgress', _elm_lang$core$Json_Decode$string));
+									},
+									A2(_elm_lang$core$Json_Decode$field, 'fireStoreValue', _elm_lang$core$Json_Decode$string));
+							},
+							A2(_elm_lang$core$Json_Decode$field, 'progress', _elm_lang$core$Json_Decode$float));
+					},
+					A2(_elm_lang$core$Json_Decode$field, 'endGoal', _elm_lang$core$Json_Decode$float));
+			},
+			A2(_elm_lang$core$Json_Decode$field, 'goalName', _elm_lang$core$Json_Decode$string))));
+var _user$project$Update$sendProgress = _elm_lang$core$Native_Platform.outgoingPort(
+	'sendProgress',
+	function (v) {
+		return [v._0, v._1, v._2];
+	});
+var _user$project$Update$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'LoadUser':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							currentUser: _elm_lang$core$Maybe$Just(_p0._0)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'LoadGoals':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							userGoals: _elm_lang$core$Maybe$Just(_p0._0)
+						}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'SelectGoal':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{selectedGoalId: _p0._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'AddProgress':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{addProgress: _p0._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			default:
+				var _p1 = A2(
+					_elm_lang$core$Result$withDefault,
+					0,
+					_elm_lang$core$String$toFloat(model.addProgress));
+				if (_p1 === 0) {
+					return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+				} else {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{selectedGoalId: '', addProgress: '', userGoals: _elm_lang$core$Maybe$Nothing}),
+						_1: _user$project$Update$sendProgress(
+							{ctor: '_Tuple3', _0: model.addProgress, _1: _p0._0._1, _2: _p0._0._0})
+					};
+				}
+		}
+	});
+var _user$project$Update$SendProgress = function (a) {
+	return {ctor: 'SendProgress', _0: a};
+};
+var _user$project$Update$AddProgress = function (a) {
+	return {ctor: 'AddProgress', _0: a};
+};
+var _user$project$Update$SelectGoal = function (a) {
+	return {ctor: 'SelectGoal', _0: a};
+};
+var _user$project$Update$LoadGoals = function (a) {
+	return {ctor: 'LoadGoals', _0: a};
+};
+var _user$project$Update$LoadUser = function (a) {
+	return {ctor: 'LoadUser', _0: a};
+};
+var _user$project$Update$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$batch(
+		{
+			ctor: '::',
+			_0: _user$project$Update$loadUser(_user$project$Update$LoadUser),
+			_1: {
+				ctor: '::',
+				_0: _user$project$Update$loadGoals(_user$project$Update$LoadGoals),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+
+var _user$project$CreateNewGoal$noStyle = _user$project$StyleSheets$NoStyle;
+var _user$project$CreateNewGoal$helpView = _user$project$StyleSheets$HelpView;
+var _user$project$CreateNewGoal$newGoal = _elm_lang$core$Native_Platform.outgoingPort(
 	'newGoal',
 	function (v) {
 		return [
@@ -22911,7 +23615,7 @@ var _user$project$Main$newGoal = _elm_lang$core$Native_Platform.outgoingPort(
 			(v._2.ctor === 'Nothing') ? null : v._2._0
 		];
 	});
-var _user$project$Main$update = F2(
+var _user$project$CreateNewGoal$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
 		switch (_p0.ctor) {
@@ -22958,81 +23662,54 @@ var _user$project$Main$update = F2(
 			default:
 				return {
 					ctor: '_Tuple2',
-					_0: model,
-					_1: _user$project$Main$newGoal(
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{
+							newGoalName: _elm_lang$core$Maybe$Just('')
+						}),
+					_1: _user$project$CreateNewGoal$newGoal(
 						{ctor: '_Tuple3', _0: model.newGoalName, _1: model.newEndGoal, _2: model.newGoalProgress})
 				};
 		}
 	});
-var _user$project$Main$Model = F5(
-	function (a, b, c, d, e) {
-		return {currentUser: a, newGoalName: b, newEndGoal: c, newGoalProgress: d, userGoals: e};
+var _user$project$CreateNewGoal$CNGModel = F4(
+	function (a, b, c, d) {
+		return {currentUser: a, newGoalName: b, newEndGoal: c, newGoalProgress: d};
 	});
-var _user$project$Main$init = {
-	ctor: '_Tuple2',
-	_0: A5(_user$project$Main$Model, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing),
-	_1: _elm_lang$core$Platform_Cmd$none
-};
-var _user$project$Main$User = F2(
-	function (a, b) {
-		return {email: a, uid: b};
-	});
-var _user$project$Main$Goal = F3(
-	function (a, b, c) {
-		return {goalName: a, endGoal: b, progress: c};
-	});
-var _user$project$Main$SendNewGoal = {ctor: 'SendNewGoal'};
-var _user$project$Main$NewGoalProgress = function (a) {
-	return {ctor: 'NewGoalProgress', _0: a};
-};
-var _user$project$Main$NewEndGoal = function (a) {
-	return {ctor: 'NewEndGoal', _0: a};
-};
-var _user$project$Main$NewGoalName = function (a) {
-	return {ctor: 'NewGoalName', _0: a};
-};
-var _user$project$Main$LoadUser = function (a) {
-	return {ctor: 'LoadUser', _0: a};
-};
-var _user$project$Main$subscriptions = function (model) {
-	return _user$project$Main$loadUser(_user$project$Main$LoadUser);
-};
-var _user$project$Main$Error = {ctor: 'Error'};
-var _user$project$Main$NoStyle = {ctor: 'NoStyle'};
-var _user$project$Main$CreateGoalStyle = {ctor: 'CreateGoalStyle'};
-var _user$project$Main$createGoalSubmit = A3(
+var _user$project$CreateNewGoal$initModel = A4(_user$project$CreateNewGoal$CNGModel, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing);
+var _user$project$CreateNewGoal$init = {ctor: '_Tuple2', _0: _user$project$CreateNewGoal$initModel, _1: _elm_lang$core$Platform_Cmd$none};
+var _user$project$CreateNewGoal$SendNewGoal = {ctor: 'SendNewGoal'};
+var _user$project$CreateNewGoal$createGoalSubmit = A3(
 	_mdgriffith$style_elements$Element$button,
-	_user$project$Main$CreateGoalStyle,
+	_user$project$StyleSheets$ButtonView,
 	{
 		ctor: '::',
-		_0: _mdgriffith$style_elements$Element_Attributes$width(
-			_mdgriffith$style_elements$Element_Attributes$px(800)),
+		_0: _mdgriffith$style_elements$Element_Attributes$height(
+			_mdgriffith$style_elements$Element_Attributes$px(25)),
 		_1: {
 			ctor: '::',
-			_0: _mdgriffith$style_elements$Element_Attributes$height(
-				_mdgriffith$style_elements$Element_Attributes$px(25)),
-			_1: {
-				ctor: '::',
-				_0: _mdgriffith$style_elements$Element_Events$onClick(_user$project$Main$SendNewGoal),
-				_1: {ctor: '[]'}
-			}
+			_0: _mdgriffith$style_elements$Element_Events$onClick(_user$project$CreateNewGoal$SendNewGoal),
+			_1: {ctor: '[]'}
 		}
 	},
 	_mdgriffith$style_elements$Element$text('Create New Goal'));
-var _user$project$Main$createGoalNameView = function (newGoalName) {
+var _user$project$CreateNewGoal$NewGoalProgress = function (a) {
+	return {ctor: 'NewGoalProgress', _0: a};
+};
+var _user$project$CreateNewGoal$createGoalProgressView = function (newGoalProgress) {
 	return A3(
 		_mdgriffith$style_elements$Element_Input$text,
-		_user$project$Main$CreateGoalStyle,
+		_user$project$StyleSheets$IndividualGoalStyle,
 		{
 			ctor: '::',
 			_0: _mdgriffith$style_elements$Element_Attributes$width(
-				_mdgriffith$style_elements$Element_Attributes$px(400)),
+				_mdgriffith$style_elements$Element_Attributes$percent(50)),
 			_1: {ctor: '[]'}
 		},
 		{
-			onChange: _user$project$Main$NewGoalName,
+			onChange: _user$project$CreateNewGoal$NewGoalProgress,
 			value: function () {
-				var _p1 = newGoalName;
+				var _p1 = newGoalProgress;
 				if (_p1.ctor === 'Nothing') {
 					return '';
 				} else {
@@ -23044,31 +23721,34 @@ var _user$project$Main$createGoalNameView = function (newGoalName) {
 					label: _mdgriffith$style_elements$Element_Input$labelLeft(
 						A3(
 							_mdgriffith$style_elements$Element$el,
-							_user$project$Main$NoStyle,
+							_user$project$CreateNewGoal$noStyle,
 							{
 								ctor: '::',
 								_0: _mdgriffith$style_elements$Element_Attributes$width(
-									_mdgriffith$style_elements$Element_Attributes$px(400)),
+									_mdgriffith$style_elements$Element_Attributes$percent(50)),
 								_1: {ctor: '[]'}
 							},
-							_mdgriffith$style_elements$Element$text('Goal Name: '))),
-					text: 'Placeholder!'
+							_mdgriffith$style_elements$Element$text('How many steps have you taken on this goal?: '))),
+					text: '0'
 				}),
 			options: {ctor: '[]'}
 		});
 };
-var _user$project$Main$createEndGoalView = function (newEndGoal) {
+var _user$project$CreateNewGoal$NewEndGoal = function (a) {
+	return {ctor: 'NewEndGoal', _0: a};
+};
+var _user$project$CreateNewGoal$createEndGoalView = function (newEndGoal) {
 	return A3(
 		_mdgriffith$style_elements$Element_Input$text,
-		_user$project$Main$CreateGoalStyle,
+		_user$project$StyleSheets$IndividualGoalStyle,
 		{
 			ctor: '::',
 			_0: _mdgriffith$style_elements$Element_Attributes$width(
-				_mdgriffith$style_elements$Element_Attributes$px(400)),
+				_mdgriffith$style_elements$Element_Attributes$percent(50)),
 			_1: {ctor: '[]'}
 		},
 		{
-			onChange: _user$project$Main$NewEndGoal,
+			onChange: _user$project$CreateNewGoal$NewEndGoal,
 			value: function () {
 				var _p2 = newEndGoal;
 				if (_p2.ctor === 'Nothing') {
@@ -23082,11 +23762,11 @@ var _user$project$Main$createEndGoalView = function (newEndGoal) {
 					label: _mdgriffith$style_elements$Element_Input$labelLeft(
 						A3(
 							_mdgriffith$style_elements$Element$el,
-							_user$project$Main$NoStyle,
+							_user$project$CreateNewGoal$noStyle,
 							{
 								ctor: '::',
 								_0: _mdgriffith$style_elements$Element_Attributes$width(
-									_mdgriffith$style_elements$Element_Attributes$px(400)),
+									_mdgriffith$style_elements$Element_Attributes$percent(50)),
 								_1: {ctor: '[]'}
 							},
 							_mdgriffith$style_elements$Element$text('How many steps is this goal?: '))),
@@ -23095,20 +23775,23 @@ var _user$project$Main$createEndGoalView = function (newEndGoal) {
 			options: {ctor: '[]'}
 		});
 };
-var _user$project$Main$createGoalProgressView = function (newGoalProgress) {
+var _user$project$CreateNewGoal$NewGoalName = function (a) {
+	return {ctor: 'NewGoalName', _0: a};
+};
+var _user$project$CreateNewGoal$createGoalNameView = function (newGoalName) {
 	return A3(
 		_mdgriffith$style_elements$Element_Input$text,
-		_user$project$Main$CreateGoalStyle,
+		_user$project$StyleSheets$IndividualGoalStyle,
 		{
 			ctor: '::',
 			_0: _mdgriffith$style_elements$Element_Attributes$width(
-				_mdgriffith$style_elements$Element_Attributes$px(400)),
+				_mdgriffith$style_elements$Element_Attributes$percent(50)),
 			_1: {ctor: '[]'}
 		},
 		{
-			onChange: _user$project$Main$NewGoalProgress,
+			onChange: _user$project$CreateNewGoal$NewGoalName,
 			value: function () {
-				var _p3 = newGoalProgress;
+				var _p3 = newGoalName;
 				if (_p3.ctor === 'Nothing') {
 					return '';
 				} else {
@@ -23120,145 +23803,727 @@ var _user$project$Main$createGoalProgressView = function (newGoalProgress) {
 					label: _mdgriffith$style_elements$Element_Input$labelLeft(
 						A3(
 							_mdgriffith$style_elements$Element$el,
-							_user$project$Main$NoStyle,
+							_user$project$CreateNewGoal$noStyle,
 							{
 								ctor: '::',
 								_0: _mdgriffith$style_elements$Element_Attributes$width(
-									_mdgriffith$style_elements$Element_Attributes$px(400)),
+									_mdgriffith$style_elements$Element_Attributes$percent(50)),
 								_1: {ctor: '[]'}
 							},
-							_mdgriffith$style_elements$Element$text('How many steps have you taken on this goal?: '))),
-					text: '0'
+							_mdgriffith$style_elements$Element$text('Goal Name: '))),
+					text: 'Placeholder!'
 				}),
-			options: {ctor: '[]'}
+			options: {
+				ctor: '::',
+				_0: _mdgriffith$style_elements$Element_Input$allowSpellcheck,
+				_1: {ctor: '[]'}
+			}
 		});
 };
-var _user$project$Main$createGoalView = function (model) {
+var _user$project$CreateNewGoal$createGoalView = function (model) {
 	return A3(
 		_mdgriffith$style_elements$Element$column,
-		_user$project$Main$NoStyle,
-		{ctor: '[]'},
+		_user$project$StyleSheets$IndividualGoalStyle,
 		{
 			ctor: '::',
-			_0: _user$project$Main$createGoalNameView(model.newGoalName),
+			_0: _mdgriffith$style_elements$Element_Attributes$paddingTop(5),
 			_1: {
 				ctor: '::',
-				_0: _user$project$Main$createEndGoalView(model.newEndGoal),
+				_0: _mdgriffith$style_elements$Element_Attributes$spacing(5),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: _user$project$CreateNewGoal$createGoalNameView(model.newGoalName),
+			_1: {
+				ctor: '::',
+				_0: _user$project$CreateNewGoal$createEndGoalView(model.newEndGoal),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Main$createGoalProgressView(model.newGoalProgress),
+					_0: _user$project$CreateNewGoal$createGoalProgressView(model.newGoalProgress),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Main$createGoalSubmit,
+						_0: _user$project$CreateNewGoal$createGoalSubmit,
 						_1: {ctor: '[]'}
 					}
 				}
 			}
 		});
 };
-var _user$project$Main$TitleBar = {ctor: 'TitleBar'};
-var _user$project$Main$stylesheet = _mdgriffith$style_elements$Style$styleSheet(
-	{
-		ctor: '::',
-		_0: A2(
-			_mdgriffith$style_elements$Style$style,
-			_user$project$Main$TitleBar,
-			{
-				ctor: '::',
-				_0: _mdgriffith$style_elements$Style_Color$text(_elm_lang$core$Color$white),
-				_1: {
-					ctor: '::',
-					_0: _mdgriffith$style_elements$Style_Color$background(_elm_lang$core$Color$blue),
-					_1: {
-						ctor: '::',
-						_0: _mdgriffith$style_elements$Style_Font$size(24),
-						_1: {ctor: '[]'}
-					}
-				}
-			}),
-		_1: {
+var _user$project$CreateNewGoal$centerCreateGoalView = function (model) {
+	return A3(
+		_mdgriffith$style_elements$Element$el,
+		_user$project$CreateNewGoal$noStyle,
+		{
 			ctor: '::',
-			_0: A2(
-				_mdgriffith$style_elements$Style$style,
-				_user$project$Main$CreateGoalStyle,
-				{
-					ctor: '::',
-					_0: _mdgriffith$style_elements$Style_Color$text(_elm_lang$core$Color$blue),
-					_1: {
-						ctor: '::',
-						_0: _mdgriffith$style_elements$Style_Color$background(_elm_lang$core$Color$grey),
-						_1: {
-							ctor: '::',
-							_0: _mdgriffith$style_elements$Style_Font$size(16),
-							_1: {ctor: '[]'}
-						}
-					}
-				}),
+			_0: _mdgriffith$style_elements$Element_Attributes$center,
 			_1: {
 				ctor: '::',
-				_0: A2(
-					_mdgriffith$style_elements$Style$style,
-					_user$project$Main$NoStyle,
-					{ctor: '[]'}),
+				_0: _mdgriffith$style_elements$Element_Attributes$width(
+					_mdgriffith$style_elements$Element_Attributes$percent(50)),
+				_1: {ctor: '[]'}
+			}
+		},
+		_user$project$CreateNewGoal$createGoalView(model));
+};
+var _user$project$CreateNewGoal$cngPageArea = function (model) {
+	return A3(
+		_mdgriffith$style_elements$Element$column,
+		_user$project$CreateNewGoal$noStyle,
+		{
+			ctor: '::',
+			_0: _mdgriffith$style_elements$Element_Attributes$spacing(10),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _user$project$AppNavBar$topBarView(model.currentUser),
+			_1: {
+				ctor: '::',
+				_0: _user$project$CreateNewGoal$centerCreateGoalView(model),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$CreateNewGoal$view = function (model) {
+	return A2(
+		_mdgriffith$style_elements$Element$layout,
+		_user$project$StyleSheets$stylesheet,
+		_user$project$CreateNewGoal$cngPageArea(model));
+};
+var _user$project$CreateNewGoal$LoadUser = function (a) {
+	return {ctor: 'LoadUser', _0: a};
+};
+var _user$project$CreateNewGoal$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$batch(
+		{
+			ctor: '::',
+			_0: _user$project$Update$loadUser(_user$project$CreateNewGoal$LoadUser),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$CreateNewGoal$main = _elm_lang$html$Html$program(
+	{init: _user$project$CreateNewGoal$init, update: _user$project$CreateNewGoal$update, subscriptions: _user$project$CreateNewGoal$subscriptions, view: _user$project$CreateNewGoal$view})();
+
+var _user$project$LandingNavBar$noStyle = _user$project$StyleSheets$NoStyle;
+var _user$project$LandingNavBar$navView = _user$project$StyleSheets$NavView;
+var _user$project$LandingNavBar$navBar = A3(
+	_mdgriffith$style_elements$Element$navigation,
+	_user$project$LandingNavBar$navView,
+	{ctor: '[]'},
+	{
+		name: 'Main Navigation',
+		options: {
+			ctor: '::',
+			_0: A2(
+				_mdgriffith$style_elements$Element$link,
+				'login.html',
+				A3(
+					_mdgriffith$style_elements$Element$button,
+					_user$project$StyleSheets$ButtonView,
+					{ctor: '[]'},
+					_mdgriffith$style_elements$Element$text('Sign in to Get Started'))),
+			_1: {ctor: '[]'}
+		}
+	});
+var _user$project$LandingNavBar$topBarView = A3(
+	_mdgriffith$style_elements$Element$row,
+	_user$project$StyleSheets$TopBarStyle,
+	{
+		ctor: '::',
+		_0: _mdgriffith$style_elements$Element_Attributes$spacing(10),
+		_1: {ctor: '[]'}
+	},
+	{
+		ctor: '::',
+		_0: A3(
+			_mdgriffith$style_elements$Element$el,
+			_user$project$LandingNavBar$navView,
+			{ctor: '[]'},
+			_mdgriffith$style_elements$Element$text('Small Logo Goes here')),
+		_1: {
+			ctor: '::',
+			_0: A3(
+				_mdgriffith$style_elements$Element$el,
+				_user$project$LandingNavBar$navView,
+				{
+					ctor: '::',
+					_0: _mdgriffith$style_elements$Element_Attributes$width(_mdgriffith$style_elements$Element_Attributes$fill),
+					_1: {ctor: '[]'}
+				},
+				_mdgriffith$style_elements$Element$text('FinishYourGoals.com')),
+			_1: {
+				ctor: '::',
+				_0: _user$project$LandingNavBar$navBar,
+				_1: {ctor: '[]'}
+			}
+		}
+	});
+
+var _user$project$DesktopLandingPage$ctaView = A3(
+	_mdgriffith$style_elements$Element$el,
+	_user$project$StyleSheets$CTAView,
+	{
+		ctor: '::',
+		_0: _mdgriffith$style_elements$Element_Attributes$center,
+		_1: {
+			ctor: '::',
+			_0: _mdgriffith$style_elements$Element_Attributes$verticalCenter,
+			_1: {ctor: '[]'}
+		}
+	},
+	_mdgriffith$style_elements$Element$text('Click to Sign-up with email and get started today!'));
+var _user$project$DesktopLandingPage$noStyle = _user$project$StyleSheets$NoStyle;
+var _user$project$DesktopLandingPage$heroView = A3(
+	_mdgriffith$style_elements$Element$column,
+	_user$project$DesktopLandingPage$noStyle,
+	{
+		ctor: '::',
+		_0: _mdgriffith$style_elements$Element_Attributes$spacing(5),
+		_1: {
+			ctor: '::',
+			_0: _mdgriffith$style_elements$Element_Attributes$height(_mdgriffith$style_elements$Element_Attributes$fill),
+			_1: {ctor: '[]'}
+		}
+	},
+	{
+		ctor: '::',
+		_0: A3(
+			_mdgriffith$style_elements$Element$h1,
+			_user$project$StyleSheets$HeroHeaderStyle,
+			{
+				ctor: '::',
+				_0: _mdgriffith$style_elements$Element_Attributes$alignTop,
 				_1: {
 					ctor: '::',
-					_0: A2(
-						_mdgriffith$style_elements$Style$style,
-						_user$project$Main$Error,
+					_0: _mdgriffith$style_elements$Element_Attributes$center,
+					_1: {ctor: '[]'}
+				}
+			},
+			_mdgriffith$style_elements$Element$bold('Tired of Quitting on Your Goals')),
+		_1: {
+			ctor: '::',
+			_0: A3(
+				_mdgriffith$style_elements$Element$h2,
+				_user$project$StyleSheets$HeroHeaderStyle,
+				{
+					ctor: '::',
+					_0: _mdgriffith$style_elements$Element_Attributes$alignTop,
+					_1: {
+						ctor: '::',
+						_0: _mdgriffith$style_elements$Element_Attributes$center,
+						_1: {ctor: '[]'}
+					}
+				},
+				_mdgriffith$style_elements$Element$text('Become Your Best Self with FinishYourGoals.com')),
+			_1: {
+				ctor: '::',
+				_0: A3(
+					_mdgriffith$style_elements$Element$wrappedRow,
+					_user$project$StyleSheets$HeroRightStyle,
+					{
+						ctor: '::',
+						_0: _mdgriffith$style_elements$Element_Attributes$center,
+						_1: {
+							ctor: '::',
+							_0: _mdgriffith$style_elements$Element_Attributes$height(_mdgriffith$style_elements$Element_Attributes$fill),
+							_1: {
+								ctor: '::',
+								_0: _mdgriffith$style_elements$Element_Attributes$spacing(5),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					{
+						ctor: '::',
+						_0: A3(
+							_mdgriffith$style_elements$Element$el,
+							_user$project$DesktopLandingPage$noStyle,
+							{
+								ctor: '::',
+								_0: _mdgriffith$style_elements$Element_Attributes$width(_mdgriffith$style_elements$Element_Attributes$fill),
+								_1: {ctor: '[]'}
+							},
+							_mdgriffith$style_elements$Element$text('image goes here')),
+						_1: {
+							ctor: '::',
+							_0: A3(
+								_mdgriffith$style_elements$Element$column,
+								_user$project$DesktopLandingPage$noStyle,
+								{
+									ctor: '::',
+									_0: _mdgriffith$style_elements$Element_Attributes$verticalCenter,
+									_1: {
+										ctor: '::',
+										_0: _mdgriffith$style_elements$Element_Attributes$width(_mdgriffith$style_elements$Element_Attributes$fill),
+										_1: {
+											ctor: '::',
+											_0: _mdgriffith$style_elements$Element_Attributes$spacing(50),
+											_1: {ctor: '[]'}
+										}
+									}
+								},
+								{
+									ctor: '::',
+									_0: A3(
+										_mdgriffith$style_elements$Element$el,
+										_user$project$DesktopLandingPage$noStyle,
+										{ctor: '[]'},
+										_mdgriffith$style_elements$Element$text('We hold you accountable with constant check-ups.')),
+									_1: {
+										ctor: '::',
+										_0: A3(
+											_mdgriffith$style_elements$Element$el,
+											_user$project$DesktopLandingPage$noStyle,
+											{ctor: '[]'},
+											_mdgriffith$style_elements$Element$text('Personalized help creating actionable goals')),
+										_1: {
+											ctor: '::',
+											_0: A3(
+												_mdgriffith$style_elements$Element$el,
+												_user$project$DesktopLandingPage$noStyle,
+												{ctor: '[]'},
+												_mdgriffith$style_elements$Element$text('Start becoming an expert in what you\'ve always wanted Today!')),
+											_1: {ctor: '[]'}
+										}
+									}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		}
+	});
+var _user$project$DesktopLandingPage$featureView = A3(
+	_mdgriffith$style_elements$Element$el,
+	_user$project$DesktopLandingPage$noStyle,
+	{
+		ctor: '::',
+		_0: _mdgriffith$style_elements$Element_Attributes$center,
+		_1: {
+			ctor: '::',
+			_0: _mdgriffith$style_elements$Element_Attributes$verticalCenter,
+			_1: {ctor: '[]'}
+		}
+	},
+	_mdgriffith$style_elements$Element$text('Feature'));
+var _user$project$DesktopLandingPage$landingPageArea = A3(
+	_mdgriffith$style_elements$Element$wrappedColumn,
+	_user$project$StyleSheets$PageStyle,
+	{ctor: '[]'},
+	{
+		ctor: '::',
+		_0: _user$project$LandingNavBar$topBarView,
+		_1: {
+			ctor: '::',
+			_0: A3(
+				_mdgriffith$style_elements$Element$mainContent,
+				_user$project$DesktopLandingPage$noStyle,
+				{
+					ctor: '::',
+					_0: _mdgriffith$style_elements$Element_Attributes$height(
+						_mdgriffith$style_elements$Element_Attributes$px(500)),
+					_1: {
+						ctor: '::',
+						_0: _mdgriffith$style_elements$Element_Attributes$width(_mdgriffith$style_elements$Element_Attributes$fill),
+						_1: {ctor: '[]'}
+					}
+				},
+				_user$project$DesktopLandingPage$heroView),
+			_1: {
+				ctor: '::',
+				_0: A3(
+					_mdgriffith$style_elements$Element$el,
+					_user$project$StyleSheets$ButtonView,
+					{
+						ctor: '::',
+						_0: _mdgriffith$style_elements$Element_Attributes$height(
+							_mdgriffith$style_elements$Element_Attributes$px(300)),
+						_1: {ctor: '[]'}
+					},
+					_user$project$DesktopLandingPage$ctaView),
+				_1: {
+					ctor: '::',
+					_0: A3(
+						_mdgriffith$style_elements$Element$el,
+						_user$project$DesktopLandingPage$noStyle,
 						{
 							ctor: '::',
-							_0: _mdgriffith$style_elements$Style_Color$text(_elm_lang$core$Color$red),
+							_0: _mdgriffith$style_elements$Element_Attributes$height(
+								_mdgriffith$style_elements$Element_Attributes$px(400)),
 							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
+						},
+						_user$project$DesktopLandingPage$featureView),
+					_1: {
+						ctor: '::',
+						_0: A3(
+							_mdgriffith$style_elements$Element$el,
+							_user$project$StyleSheets$ButtonView,
+							{
+								ctor: '::',
+								_0: _mdgriffith$style_elements$Element_Attributes$height(
+									_mdgriffith$style_elements$Element_Attributes$px(300)),
+								_1: {ctor: '[]'}
+							},
+							_user$project$DesktopLandingPage$ctaView),
+						_1: {ctor: '[]'}
+					}
 				}
 			}
 		}
 	});
-var _user$project$Main$userView = function (user) {
-	var _p4 = user;
-	if (_p4.ctor === 'Nothing') {
+var _user$project$DesktopLandingPage$view = A2(_mdgriffith$style_elements$Element$layout, _user$project$StyleSheets$stylesheet, _user$project$DesktopLandingPage$landingPageArea);
+var _user$project$DesktopLandingPage$main = _elm_lang$virtual_dom$Native_VirtualDom.staticProgram(_user$project$DesktopLandingPage$view);
+
+var _user$project$Main$landingPageArea = _user$project$DesktopLandingPage$view;
+var _user$project$Main$selectGoalButton = function (currentGoal) {
+	return A3(
+		_mdgriffith$style_elements$Element$button,
+		_user$project$StyleSheets$ButtonView,
+		{
+			ctor: '::',
+			_0: _mdgriffith$style_elements$Element_Attributes$height(
+				_mdgriffith$style_elements$Element_Attributes$px(40)),
+			_1: {
+				ctor: '::',
+				_0: _mdgriffith$style_elements$Element_Events$onClick(
+					_user$project$Update$SendProgress(
+						{ctor: '_Tuple2', _0: currentGoal.fireStoreValue, _1: currentGoal.progress})),
+				_1: {ctor: '[]'}
+			}
+		},
+		_mdgriffith$style_elements$Element$text('update this goal'));
+};
+var _user$project$Main$noStyle = _user$project$StyleSheets$NoStyle;
+var _user$project$Main$goalIndividualView = function (goal) {
+	return A3(
+		_mdgriffith$style_elements$Element$column,
+		_user$project$StyleSheets$IndividualGoalStyle,
+		{
+			ctor: '::',
+			_0: _mdgriffith$style_elements$Element_Attributes$paddingTop(10),
+			_1: {
+				ctor: '::',
+				_0: _mdgriffith$style_elements$Element_Attributes$spacing(10),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A3(
+				_mdgriffith$style_elements$Element$row,
+				_user$project$Main$noStyle,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: A3(
+						_mdgriffith$style_elements$Element$el,
+						_user$project$Main$noStyle,
+						{
+							ctor: '::',
+							_0: _mdgriffith$style_elements$Element_Attributes$width(
+								_mdgriffith$style_elements$Element_Attributes$percent(50)),
+							_1: {ctor: '[]'}
+						},
+						_mdgriffith$style_elements$Element$text('Goal Name: ')),
+					_1: {
+						ctor: '::',
+						_0: A3(
+							_mdgriffith$style_elements$Element$el,
+							_user$project$Main$noStyle,
+							{
+								ctor: '::',
+								_0: _mdgriffith$style_elements$Element_Attributes$width(
+									_mdgriffith$style_elements$Element_Attributes$percent(50)),
+								_1: {ctor: '[]'}
+							},
+							_mdgriffith$style_elements$Element$text(goal.goalName)),
+						_1: {ctor: '[]'}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A3(
+					_mdgriffith$style_elements$Element$row,
+					_user$project$Main$noStyle,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: A3(
+							_mdgriffith$style_elements$Element$el,
+							_user$project$Main$noStyle,
+							{
+								ctor: '::',
+								_0: _mdgriffith$style_elements$Element_Attributes$width(
+									_mdgriffith$style_elements$Element_Attributes$percent(50)),
+								_1: {ctor: '[]'}
+							},
+							_mdgriffith$style_elements$Element$text('Date Created ')),
+						_1: {
+							ctor: '::',
+							_0: A3(
+								_mdgriffith$style_elements$Element$el,
+								_user$project$Main$noStyle,
+								{
+									ctor: '::',
+									_0: _mdgriffith$style_elements$Element_Attributes$width(
+										_mdgriffith$style_elements$Element_Attributes$percent(50)),
+									_1: {ctor: '[]'}
+								},
+								_mdgriffith$style_elements$Element$text(goal.dateCreated)),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A3(
+						_mdgriffith$style_elements$Element$row,
+						_user$project$Main$noStyle,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: A3(
+								_mdgriffith$style_elements$Element$el,
+								_user$project$Main$noStyle,
+								{
+									ctor: '::',
+									_0: _mdgriffith$style_elements$Element_Attributes$width(
+										_mdgriffith$style_elements$Element_Attributes$percent(50)),
+									_1: {ctor: '[]'}
+								},
+								_mdgriffith$style_elements$Element$text('Last Updated: ')),
+							_1: {
+								ctor: '::',
+								_0: A3(
+									_mdgriffith$style_elements$Element$el,
+									_user$project$Main$noStyle,
+									{
+										ctor: '::',
+										_0: _mdgriffith$style_elements$Element_Attributes$width(
+											_mdgriffith$style_elements$Element_Attributes$percent(50)),
+										_1: {ctor: '[]'}
+									},
+									_mdgriffith$style_elements$Element$text(goal.lastUpdate)),
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A3(
+							_mdgriffith$style_elements$Element$row,
+							_user$project$Main$noStyle,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: A3(
+									_mdgriffith$style_elements$Element$el,
+									_user$project$Main$noStyle,
+									{
+										ctor: '::',
+										_0: _mdgriffith$style_elements$Element_Attributes$width(
+											_mdgriffith$style_elements$Element_Attributes$percent(50)),
+										_1: {ctor: '[]'}
+									},
+									_mdgriffith$style_elements$Element$text('Goal Progress: ')),
+								_1: {
+									ctor: '::',
+									_0: A3(
+										_mdgriffith$style_elements$Element$el,
+										_user$project$Main$noStyle,
+										{
+											ctor: '::',
+											_0: _mdgriffith$style_elements$Element_Attributes$width(
+												_mdgriffith$style_elements$Element_Attributes$percent(50)),
+											_1: {ctor: '[]'}
+										},
+										_mdgriffith$style_elements$Element$text(
+											_elm_lang$core$Basics$toString(goal.progress))),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A3(
+								_mdgriffith$style_elements$Element$row,
+								_user$project$Main$noStyle,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: A3(
+										_mdgriffith$style_elements$Element$el,
+										_user$project$Main$noStyle,
+										{
+											ctor: '::',
+											_0: _mdgriffith$style_elements$Element_Attributes$width(
+												_mdgriffith$style_elements$Element_Attributes$percent(50)),
+											_1: {ctor: '[]'}
+										},
+										_mdgriffith$style_elements$Element$text('End Goal: ')),
+									_1: {
+										ctor: '::',
+										_0: A3(
+											_mdgriffith$style_elements$Element$el,
+											_user$project$Main$noStyle,
+											{
+												ctor: '::',
+												_0: _mdgriffith$style_elements$Element_Attributes$width(
+													_mdgriffith$style_elements$Element_Attributes$percent(50)),
+												_1: {ctor: '[]'}
+											},
+											_mdgriffith$style_elements$Element$text(
+												_elm_lang$core$Basics$toString(goal.endGoal))),
+										_1: {ctor: '[]'}
+									}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A3(
+									_mdgriffith$style_elements$Element_Input$text,
+									_user$project$StyleSheets$IndividualGoalStyle,
+									{
+										ctor: '::',
+										_0: _mdgriffith$style_elements$Element_Attributes$width(
+											_mdgriffith$style_elements$Element_Attributes$percent(50)),
+										_1: {
+											ctor: '::',
+											_0: _mdgriffith$style_elements$Element_Attributes$paddingBottom(5),
+											_1: {ctor: '[]'}
+										}
+									},
+									{
+										onChange: _user$project$Update$AddProgress,
+										value: goal.addProgress,
+										label: _mdgriffith$style_elements$Element_Input$placeholder(
+											{
+												label: _mdgriffith$style_elements$Element_Input$labelLeft(
+													A3(
+														_mdgriffith$style_elements$Element$el,
+														_user$project$Main$noStyle,
+														{
+															ctor: '::',
+															_0: _mdgriffith$style_elements$Element_Attributes$width(
+																_mdgriffith$style_elements$Element_Attributes$percent(50)),
+															_1: {ctor: '[]'}
+														},
+														_mdgriffith$style_elements$Element$text('Update this goal?: '))),
+												text: ''
+											}),
+										options: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _user$project$Main$selectGoalButton(goal),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+};
+var _user$project$Main$goalListView = function (userGoals) {
+	var _p0 = userGoals;
+	if (_p0.ctor === 'Nothing') {
 		return A3(
 			_mdgriffith$style_elements$Element$el,
-			_user$project$Main$TitleBar,
+			_user$project$Main$noStyle,
 			{ctor: '[]'},
-			_mdgriffith$style_elements$Element$text('Please Sign in'));
+			_mdgriffith$style_elements$Element$text('Loading Goals'));
 	} else {
-		return A3(
-			_mdgriffith$style_elements$Element$el,
-			_user$project$Main$TitleBar,
-			{ctor: '[]'},
-			_mdgriffith$style_elements$Element$text(_p4._0.email));
+		var _p2 = _p0._0;
+		var _p1 = _p2;
+		if (_p1.ctor === '[]') {
+			return A3(
+				_mdgriffith$style_elements$Element$el,
+				_user$project$Main$noStyle,
+				{ctor: '[]'},
+				_mdgriffith$style_elements$Element$text('No Goals'));
+		} else {
+			return A3(
+				_mdgriffith$style_elements$Element$wrappedRow,
+				_user$project$Main$noStyle,
+				{
+					ctor: '::',
+					_0: _mdgriffith$style_elements$Element_Attributes$width(
+						_mdgriffith$style_elements$Element_Attributes$percent(75)),
+					_1: {
+						ctor: '::',
+						_0: _mdgriffith$style_elements$Element_Attributes$spacing(20),
+						_1: {
+							ctor: '::',
+							_0: _mdgriffith$style_elements$Element_Attributes$center,
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A2(_elm_lang$core$List$map, _user$project$Main$goalIndividualView, _p2));
+		}
 	}
 };
-var _user$project$Main$titleView = function (model) {
-	return _user$project$Main$userView(model.currentUser);
+var _user$project$Main$goalView = function (model) {
+	return A3(
+		_mdgriffith$style_elements$Element$column,
+		_user$project$Main$noStyle,
+		{
+			ctor: '::',
+			_0: _mdgriffith$style_elements$Element_Attributes$center,
+			_1: {
+				ctor: '::',
+				_0: _mdgriffith$style_elements$Element_Attributes$height(
+					_mdgriffith$style_elements$Element_Attributes$percent(100)),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: _user$project$Main$goalListView(model.userGoals),
+			_1: {ctor: '[]'}
+		});
 };
 var _user$project$Main$pageArea = function (model) {
 	return A3(
 		_mdgriffith$style_elements$Element$column,
-		_user$project$Main$NoStyle,
-		{ctor: '[]'},
+		_user$project$StyleSheets$PageStyle,
 		{
 			ctor: '::',
-			_0: _user$project$Main$titleView(model),
+			_0: _mdgriffith$style_elements$Element_Attributes$spacing(10),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _user$project$AppNavBar$topBarView(model.currentUser),
 			_1: {
 				ctor: '::',
-				_0: _user$project$Main$createGoalView(model),
+				_0: _user$project$Main$goalView(model),
 				_1: {ctor: '[]'}
 			}
 		});
 };
 var _user$project$Main$view = function (model) {
-	return A2(
-		_mdgriffith$style_elements$Element$layout,
-		_user$project$Main$stylesheet,
-		_user$project$Main$pageArea(model));
+	var _p3 = model.currentUser;
+	if (_p3.ctor === 'Nothing') {
+		return _user$project$Main$landingPageArea;
+	} else {
+		return A2(
+			_mdgriffith$style_elements$Element$layout,
+			_user$project$StyleSheets$stylesheet,
+			_user$project$Main$pageArea(model));
+	}
 };
+var _user$project$Main$helpView = _user$project$StyleSheets$HelpView;
+var _user$project$Main$initModel = A4(_user$project$Model$Model, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing, '', '');
+var _user$project$Main$init = {ctor: '_Tuple2', _0: _user$project$Main$initModel, _1: _elm_lang$core$Platform_Cmd$none};
 var _user$project$Main$main = _elm_lang$html$Html$program(
-	{init: _user$project$Main$init, update: _user$project$Main$update, subscriptions: _user$project$Main$subscriptions, view: _user$project$Main$view})();
+	{init: _user$project$Main$init, update: _user$project$Update$update, subscriptions: _user$project$Update$subscriptions, view: _user$project$Main$view})();
 
 var Elm = {};
+Elm['CreateNewGoal'] = Elm['CreateNewGoal'] || {};
+if (typeof _user$project$CreateNewGoal$main !== 'undefined') {
+    _user$project$CreateNewGoal$main(Elm['CreateNewGoal'], 'CreateNewGoal', undefined);
+}
 Elm['Main'] = Elm['Main'] || {};
 if (typeof _user$project$Main$main !== 'undefined') {
     _user$project$Main$main(Elm['Main'], 'Main', undefined);
