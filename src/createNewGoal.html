@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Swish</title>
+  <title>FinishYourGoals.com</title>
   <script src="main.js"></script>
 
   <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
@@ -56,7 +56,8 @@
             goalProgress: y,
             addProgress: "0",
             uid: user.uid,
-            dateCreated : new Date()
+            dateCreated : new Date(),
+            lastUpdate : new Date()
         }).then(function(docRef) {
             console.log("Document written with ID: ", docRef.id);
             window.location.replace("index.html")
