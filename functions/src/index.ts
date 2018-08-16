@@ -10,10 +10,15 @@ const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 export const createNewUserDoc = functions.auth.user().onCreate((user) => {
   const uid = user.uid;
-  const userEmail = user.email;
-  return admin.firestore().doc('users/'+uid).set({
-    email: userEmail,
-    uid: uid
+
+  return admin.firestore().doc(uid+'/user').set({
+    goalName: "Create Five Goals",
+    endGoal: 5,
+    goalProgress: 0,
+    addProgress: "0",
+    uid: user.uid,
+    dateCreated : new Date(),
+    lastUpdate : new Date()
 
   })
 });

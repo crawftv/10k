@@ -50,7 +50,8 @@
         window.alert("Please include a name for your goal.")
       }
       else {
-        firebase.firestore().collection("Goals").add({
+        uid = user.uid
+        firebase.firestore().collection(uid).add({
             goalName: createGoalArray[0],
             endGoal: x,
             goalProgress: y,

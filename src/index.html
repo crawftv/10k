@@ -34,7 +34,7 @@
       currentUser.email = user.email;
       currentUser.uid = user.uid;
       app.ports.loadUser.send(currentUser);
-      firebase.firestore().collection("Goals").where("uid", "==", user.uid)
+      firebase.firestore().collection(user.uid).where("uid", "==", user.uid)
       .onSnapshot(function(querySnapshot) {
           var goalList = [];
 

@@ -1,12 +1,11 @@
 module StyleSheets exposing (..)
 
+import Color exposing (..)
 import Style exposing (..)
+import Style.Background as Background exposing (gradient, step)
+import Style.Border as Border
 import Style.Color as Color
 import Style.Font as Font
-import Style.Border as Border
-import Color exposing (..)
-import Style.Background exposing (gradient, step)
-import Style.Background as Background
 
 
 type MyStyles

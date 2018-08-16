@@ -2,8 +2,8 @@ module AppNavBar exposing (topBarView)
 
 import Element exposing (..)
 import Element.Attributes as Att
-import StyleSheets exposing (MyStyles, stylesheet)
 import Model exposing (Model, User)
+import StyleSheets exposing (MyStyles, stylesheet)
 
 
 helpView =
@@ -23,9 +23,10 @@ navBar user =
                 { name = "Main Navigation"
                 , options =
                     [ link
-                        "login.html"
+                        "Login.html"
                         (button StyleSheets.ButtonView [] (text "Login"))
-                      -- , link "/logout" (el helpView [] (text "logout"))
+
+                    -- , link "/logout" (el helpView [] (text "logout"))
                     ]
                 }
 
@@ -34,18 +35,16 @@ navBar user =
                 [ Att.alignRight, Att.spacing 16 ]
                 { name = "Main Navigation"
                 , options =
-                    [ (el navView [] (text user.email))
-                    , link
-                        "logout.html"
+                    [ link
+                        "Logout.html"
                         (button StyleSheets.ButtonView [] (text "Logout"))
-                    , link "createNewGoal.html" (button StyleSheets.ButtonView [] (text "Create New Goal"))
                     ]
                 }
 
 
 topBarView : Maybe User -> Element MyStyles variation msg
 topBarView user =
-    Element.row StyleSheets.TopBarStyle
+    Element.wrappedRow StyleSheets.TopBarStyle
         [ Att.spacing 20 ]
         [ el navView [] (text "Small Logo Goes here")
         , el navView [ Att.width Att.fill ] (text "FinishYourGoals.com")

@@ -19,16 +19,17 @@ navBar =
         { name = "Main Navigation"
         , options =
             [ link
-                "login.html"
+                "Login.html"
                 (button StyleSheets.ButtonView [] (text "Sign in to Get Started"))
-              -- , link "/logout" (el helpView [] (text "logout"))
+
+            -- , link "/logout" (el helpView [] (text "logout"))
             ]
         }
 
 
 topBarView : Element MyStyles variation msg
 topBarView =
-    Element.row StyleSheets.TopBarStyle
+    Element.wrappedRow StyleSheets.TopBarStyle
         [ Att.spacing 10 ]
         [ el navView [] (text "Small Logo Goes here")
         , el navView [ Att.width Att.fill ] (text "FinishYourGoals.com")
