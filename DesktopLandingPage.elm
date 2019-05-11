@@ -22,7 +22,7 @@ landingPageArea =
     Element.wrappedColumn StyleSheets.PageStyle
         []
         [ LandingNavBar.topBarView
-        , Element.mainContent noStyle [ Att.height (Att.px 500), Att.width (Att.fill) ] heroView
+        , Element.mainContent noStyle [ Att.height (Att.px 500), Att.width Att.fill ] heroView
         , el StyleSheets.ButtonView [ Att.height (Att.px 300) ] (ctaView "Sign-up! and Get Started Today!")
         , el noStyle [ Att.height (Att.px 400) ] featureView
         , el StyleSheets.ButtonView [ Att.height (Att.px 300) ] (ctaView "This offer is limited to 200 motivated people Sign-up to get a spot!")

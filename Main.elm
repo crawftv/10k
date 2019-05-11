@@ -1,13 +1,19 @@
 port module Main exposing (..)
 
+import AppNavBar
+import DesktopLandingPage
 import Element exposing (..)
-import Element.Input as Input
 import Element.Attributes as Att
 import Element.Events as Ev
+import Element.Input as Input
 import Html exposing (Html)
+import Model exposing (Goal, Model, User)
 import StyleSheets exposing (MyStyles, stylesheet)
+<<<<<<< HEAD
 import AppNavBar
 import Model exposing (User, Goal, Model)
+=======
+>>>>>>> 041f09abd96ee30d72a6711d9f20e9579f0d7824
 import Update exposing (..)
 
 
@@ -23,7 +29,11 @@ main =
 
 initModel : Model
 initModel =
+<<<<<<< HEAD
     (Model { uid = "" } Nothing "" "")
+=======
+    Model Nothing Nothing "" ""
+>>>>>>> 041f09abd96ee30d72a6711d9f20e9579f0d7824
 
 
 init : ( Model, Cmd Msg )
@@ -39,31 +49,40 @@ noStyle =
     StyleSheets.NoStyle
 
 
+shortDate : String -> String
+shortDate dateString =
+    dateString
+        |> String.split " "
+        |> List.drop 1
+        |> List.take 3
+        |> String.join " "
+
+
 goalIndividualView : Goal -> Element MyStyles variation Msg
 goalIndividualView goal =
-    Element.column StyleSheets.IndividualGoalStyle
-        [ Att.paddingTop 10, Att.spacing 10 ]
-        [ Element.row noStyle
+    Element.wrappedColumn StyleSheets.IndividualGoalStyle
+        [ Att.paddingTop 10, Att.spacing 10, Att.width (Att.px 300) ]
+        [ Element.wrappedRow noStyle
             []
             [ el noStyle [ Att.width (Att.percent 50) ] (text "Goal Name: ")
             , el noStyle [ Att.width (Att.percent 50) ] (text goal.goalName)
             ]
-        , Element.row noStyle
+        , Element.wrappedRow noStyle
             []
             [ el noStyle [ Att.width (Att.percent 50) ] (text "Date Created ")
-            , el noStyle [ Att.width (Att.percent 50) ] (text goal.dateCreated)
+            , el noStyle [ Att.width (Att.percent 50) ] (text (shortDate goal.dateCreated))
             ]
-        , Element.row noStyle
+        , Element.wrappedRow noStyle
             []
             [ el noStyle [ Att.width (Att.percent 50) ] (text "Last Updated: ")
-            , el noStyle [ Att.width (Att.percent 50) ] (text goal.lastUpdate)
+            , el noStyle [ Att.width (Att.percent 50) ] (text (shortDate goal.lastUpdate))
             ]
-        , Element.row noStyle
+        , Element.wrappedRow noStyle
             []
             [ el noStyle [ Att.width (Att.percent 50) ] (text "Goal Progress: ")
             , el noStyle [ Att.width (Att.percent 50) ] (text (toString goal.progress))
             ]
-        , Element.row noStyle
+        , Element.wrappedRow noStyle
             []
             [ el noStyle [ Att.width (Att.percent 50) ] (text "End Goal: ")
             , el noStyle [ Att.width (Att.percent 50) ] (text (toString goal.endGoal))
@@ -79,12 +98,12 @@ goalIndividualView goal =
             , el noStyle [ Att.width (Att.percent 50) ] (text ((toString (ceiling ((goal.endGoal - goal.progress) / (getPace goal.unixLastUpdate goal.unixDateCreated goal.progress)))) ++ " steps per day"))
             ]
         , Input.text StyleSheets.IndividualGoalStyle
-            [ Att.width (Att.percent 50), Att.paddingBottom 5 ]
+            [ Att.width (Att.percent 100), Att.paddingBottom 5 ]
             { onChange = AddProgress
             , value = goal.addProgress
             , label =
                 Input.placeholder
-                    { label = Input.labelLeft (el noStyle [ Att.width (Att.percent 50) ] (text "Update this goal?: "))
+                    { label = Input.labelAbove (el noStyle [ Att.width (Att.percent 50) ] (text "Update this goal?: "))
                     , text = ""
                     }
             , options =
@@ -103,7 +122,7 @@ getPace unixLastUpdate unixDateCreated progress =
 selectGoalButton : Goal -> Element MyStyles variation Msg
 selectGoalButton currentGoal =
     button StyleSheets.ButtonView
-        [ Att.height (Att.px 40), (Ev.onClick (SendProgress ( currentGoal.fireStoreValue, currentGoal.progress ))) ]
+        [ Att.height (Att.px 40), Ev.onClick (SendProgress ( currentGoal.fireStoreValue, currentGoal.progress )) ]
         (text "update this goal")
 
 
@@ -116,7 +135,7 @@ goalListView userGoals =
         Just userGoals ->
             case userGoals of
                 [] ->
-                    el noStyle [] (text "No Goals")
+                    createNewGoalView
 
                 _ ->
                     userGoals
@@ -126,7 +145,14 @@ goalListView userGoals =
 
 goalView : Model -> Element MyStyles variation Msg
 goalView model =
-    Element.column noStyle [ Att.center, Att.height (Att.percent 100) ] [ goalListView model.userGoals ]
+    Element.column noStyle [ Att.center, Att.height (Att.percent 100) ] [ createNewGoalView, goalListView model.userGoals ]
+
+
+createNewGoalView : Element MyStyles variation Msg
+createNewGoalView =
+    link
+        "createNewGoal.html"
+        (button StyleSheets.ButtonView [ Att.spacingXY 0 10, Att.center, Att.width (Att.px 309) ] (text "Create New Goal"))
 
 
 pageArea : Model -> Element MyStyles variation Msg
