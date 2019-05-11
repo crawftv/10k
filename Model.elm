@@ -2,7 +2,7 @@ module Model exposing (..)
 
 
 type alias Model =
-    { currentUser : Maybe User
+    { currentUser : User
     , userGoals : Maybe (List Goal)
     , selectedGoalId : String
     , addProgress : String
@@ -10,8 +10,7 @@ type alias Model =
 
 
 type alias User =
-    { email : String
-    , uid : String
+    { uid : String
     }
 
 
@@ -23,6 +22,8 @@ type alias Goal =
     , addProgress : String
     , dateCreated : String
     , lastUpdate : String
+    , unixLastUpdate : Float
+    , unixDateCreated : Float
     }
 
 

@@ -19,7 +19,7 @@ navBar =
         { name = "Main Navigation"
         , options =
             [ link
-                "login.html"
+                "https://plasso.com/s/XmXME9WRs3-finishyourgoalscom"
                 (button StyleSheets.ButtonView [] (text "Sign in to Get Started"))
               -- , link "/logout" (el helpView [] (text "logout"))
             ]

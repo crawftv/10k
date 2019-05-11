@@ -7,7 +7,6 @@ import Element.Events as Ev
 import Html exposing (Html)
 import StyleSheets exposing (MyStyles, stylesheet)
 import AppNavBar
-import DesktopLandingPage
 import Model exposing (User, Goal, Model)
 import Update exposing (..)
 
@@ -24,7 +23,7 @@ main =
 
 initModel : Model
 initModel =
-    (Model Nothing Nothing "" "")
+    (Model { uid = "" } Nothing "" "")
 
 
 init : ( Model, Cmd Msg )
@@ -69,6 +68,16 @@ goalIndividualView goal =
             [ el noStyle [ Att.width (Att.percent 50) ] (text "End Goal: ")
             , el noStyle [ Att.width (Att.percent 50) ] (text (toString goal.endGoal))
             ]
+        , Element.row noStyle
+            []
+            [ el noStyle [ Att.width (Att.percent 50) ] (text "Pace: ")
+            , el noStyle [ Att.width (Att.percent 50) ] (text ((toString (ceiling (getPace goal.unixLastUpdate goal.unixDateCreated goal.progress))) ++ " steps per day"))
+            ]
+        , Element.row noStyle
+            []
+            [ el noStyle [ Att.width (Att.percent 50) ] (text "Projected number of days until finishing: ")
+            , el noStyle [ Att.width (Att.percent 50) ] (text ((toString (ceiling ((goal.endGoal - goal.progress) / (getPace goal.unixLastUpdate goal.unixDateCreated goal.progress)))) ++ " steps per day"))
+            ]
         , Input.text StyleSheets.IndividualGoalStyle
             [ Att.width (Att.percent 50), Att.paddingBottom 5 ]
             { onChange = AddProgress
@@ -84,6 +93,11 @@ goalIndividualView goal =
             }
         , selectGoalButton goal
         ]
+
+
+getPace : Float -> Float -> Float -> Float
+getPace unixLastUpdate unixDateCreated progress =
+    (progress / ((unixLastUpdate - unixDateCreated) / 86400))
 
 
 selectGoalButton : Goal -> Element MyStyles variation Msg
@@ -117,20 +131,10 @@ goalView model =
 
 pageArea : Model -> Element MyStyles variation Msg
 pageArea model =
-    Element.column StyleSheets.PageStyle [ Att.spacing 10 ] [ AppNavBar.topBarView model.currentUser, goalView model ]
-
-
-landingPageArea : Html Msg
-landingPageArea =
-    DesktopLandingPage.view
+    Element.column StyleSheets.PageStyle [ Att.spacing 10 ] [ AppNavBar.topBarView, goalView model ]
 
 
 view : Model -> Html Msg
 view model =
-    case model.currentUser of
-        Nothing ->
-            landingPageArea
-
-        _ ->
-            Element.layout stylesheet <|
-                pageArea model
+    Element.layout stylesheet <|
+        pageArea model

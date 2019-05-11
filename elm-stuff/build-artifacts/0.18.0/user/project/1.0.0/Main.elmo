@@ -1,4 +1,3 @@
-var _user$project$Main$landingPageArea = _user$project$DesktopLandingPage$view;
 var _user$project$Main$selectGoalButton = function (currentGoal) {
 	return A3(
 		_mdgriffith$style_elements$Element$button,
@@ -17,6 +16,10 @@ var _user$project$Main$selectGoalButton = function (currentGoal) {
 		},
 		_mdgriffith$style_elements$Element$text('update this goal'));
 };
+var _user$project$Main$getPace = F3(
+	function (unixLastUpdate, unixDateCreated, progress) {
+		return progress / ((unixLastUpdate - unixDateCreated) / 86400);
+	});
 var _user$project$Main$noStyle = _user$project$StyleSheets$NoStyle;
 var _user$project$Main$goalIndividualView = function (goal) {
 	return A3(
@@ -201,42 +204,122 @@ var _user$project$Main$goalIndividualView = function (goal) {
 							_1: {
 								ctor: '::',
 								_0: A3(
-									_mdgriffith$style_elements$Element_Input$text,
-									_user$project$StyleSheets$IndividualGoalStyle,
+									_mdgriffith$style_elements$Element$row,
+									_user$project$Main$noStyle,
+									{ctor: '[]'},
 									{
 										ctor: '::',
-										_0: _mdgriffith$style_elements$Element_Attributes$width(
-											_mdgriffith$style_elements$Element_Attributes$percent(50)),
+										_0: A3(
+											_mdgriffith$style_elements$Element$el,
+											_user$project$Main$noStyle,
+											{
+												ctor: '::',
+												_0: _mdgriffith$style_elements$Element_Attributes$width(
+													_mdgriffith$style_elements$Element_Attributes$percent(50)),
+												_1: {ctor: '[]'}
+											},
+											_mdgriffith$style_elements$Element$text('Pace: ')),
 										_1: {
 											ctor: '::',
-											_0: _mdgriffith$style_elements$Element_Attributes$paddingBottom(5),
+											_0: A3(
+												_mdgriffith$style_elements$Element$el,
+												_user$project$Main$noStyle,
+												{
+													ctor: '::',
+													_0: _mdgriffith$style_elements$Element_Attributes$width(
+														_mdgriffith$style_elements$Element_Attributes$percent(50)),
+													_1: {ctor: '[]'}
+												},
+												_mdgriffith$style_elements$Element$text(
+													A2(
+														_elm_lang$core$Basics_ops['++'],
+														_elm_lang$core$Basics$toString(
+															_elm_lang$core$Basics$ceiling(
+																A3(_user$project$Main$getPace, goal.unixLastUpdate, goal.unixDateCreated, goal.progress))),
+														' steps per day'))),
 											_1: {ctor: '[]'}
 										}
-									},
-									{
-										onChange: _user$project$Update$AddProgress,
-										value: goal.addProgress,
-										label: _mdgriffith$style_elements$Element_Input$placeholder(
-											{
-												label: _mdgriffith$style_elements$Element_Input$labelLeft(
-													A3(
-														_mdgriffith$style_elements$Element$el,
-														_user$project$Main$noStyle,
-														{
-															ctor: '::',
-															_0: _mdgriffith$style_elements$Element_Attributes$width(
-																_mdgriffith$style_elements$Element_Attributes$percent(50)),
-															_1: {ctor: '[]'}
-														},
-														_mdgriffith$style_elements$Element$text('Update this goal?: '))),
-												text: ''
-											}),
-										options: {ctor: '[]'}
 									}),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Main$selectGoalButton(goal),
-									_1: {ctor: '[]'}
+									_0: A3(
+										_mdgriffith$style_elements$Element$row,
+										_user$project$Main$noStyle,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: A3(
+												_mdgriffith$style_elements$Element$el,
+												_user$project$Main$noStyle,
+												{
+													ctor: '::',
+													_0: _mdgriffith$style_elements$Element_Attributes$width(
+														_mdgriffith$style_elements$Element_Attributes$percent(50)),
+													_1: {ctor: '[]'}
+												},
+												_mdgriffith$style_elements$Element$text('Projected number of days until finishing: ')),
+											_1: {
+												ctor: '::',
+												_0: A3(
+													_mdgriffith$style_elements$Element$el,
+													_user$project$Main$noStyle,
+													{
+														ctor: '::',
+														_0: _mdgriffith$style_elements$Element_Attributes$width(
+															_mdgriffith$style_elements$Element_Attributes$percent(50)),
+														_1: {ctor: '[]'}
+													},
+													_mdgriffith$style_elements$Element$text(
+														A2(
+															_elm_lang$core$Basics_ops['++'],
+															_elm_lang$core$Basics$toString(
+																_elm_lang$core$Basics$ceiling(
+																	(goal.endGoal - goal.progress) / A3(_user$project$Main$getPace, goal.unixLastUpdate, goal.unixDateCreated, goal.progress))),
+															' steps per day'))),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A3(
+											_mdgriffith$style_elements$Element_Input$text,
+											_user$project$StyleSheets$IndividualGoalStyle,
+											{
+												ctor: '::',
+												_0: _mdgriffith$style_elements$Element_Attributes$width(
+													_mdgriffith$style_elements$Element_Attributes$percent(50)),
+												_1: {
+													ctor: '::',
+													_0: _mdgriffith$style_elements$Element_Attributes$paddingBottom(5),
+													_1: {ctor: '[]'}
+												}
+											},
+											{
+												onChange: _user$project$Update$AddProgress,
+												value: goal.addProgress,
+												label: _mdgriffith$style_elements$Element_Input$placeholder(
+													{
+														label: _mdgriffith$style_elements$Element_Input$labelLeft(
+															A3(
+																_mdgriffith$style_elements$Element$el,
+																_user$project$Main$noStyle,
+																{
+																	ctor: '::',
+																	_0: _mdgriffith$style_elements$Element_Attributes$width(
+																		_mdgriffith$style_elements$Element_Attributes$percent(50)),
+																	_1: {ctor: '[]'}
+																},
+																_mdgriffith$style_elements$Element$text('Update this goal?: '))),
+														text: ''
+													}),
+												options: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Main$selectGoalButton(goal),
+											_1: {ctor: '[]'}
+										}
+									}
 								}
 							}
 						}
@@ -315,7 +398,7 @@ var _user$project$Main$pageArea = function (model) {
 		},
 		{
 			ctor: '::',
-			_0: _user$project$AppNavBar$topBarView(model.currentUser),
+			_0: _user$project$AppNavBar$topBarView,
 			_1: {
 				ctor: '::',
 				_0: _user$project$Main$goalView(model),
@@ -324,18 +407,18 @@ var _user$project$Main$pageArea = function (model) {
 		});
 };
 var _user$project$Main$view = function (model) {
-	var _p3 = model.currentUser;
-	if (_p3.ctor === 'Nothing') {
-		return _user$project$Main$landingPageArea;
-	} else {
-		return A2(
-			_mdgriffith$style_elements$Element$layout,
-			_user$project$StyleSheets$stylesheet,
-			_user$project$Main$pageArea(model));
-	}
+	return A2(
+		_mdgriffith$style_elements$Element$layout,
+		_user$project$StyleSheets$stylesheet,
+		_user$project$Main$pageArea(model));
 };
 var _user$project$Main$helpView = _user$project$StyleSheets$HelpView;
-var _user$project$Main$initModel = A4(_user$project$Model$Model, _elm_lang$core$Maybe$Nothing, _elm_lang$core$Maybe$Nothing, '', '');
+var _user$project$Main$initModel = A4(
+	_user$project$Model$Model,
+	{uid: ''},
+	_elm_lang$core$Maybe$Nothing,
+	'',
+	'');
 var _user$project$Main$init = {ctor: '_Tuple2', _0: _user$project$Main$initModel, _1: _elm_lang$core$Platform_Cmd$none};
 var _user$project$Main$main = _elm_lang$html$Html$program(
 	{init: _user$project$Main$init, update: _user$project$Update$update, subscriptions: _user$project$Update$subscriptions, view: _user$project$Main$view})();

@@ -13,7 +13,7 @@ exports.createNewUserDoc = functions.auth.user().onCreate((user) => {
     const userEmail = user.email;
     return admin.firestore().doc('users/' + uid).set({
         email: userEmail,
-        uid: uid,
+        uid: uid
     });
 });
 //# sourceMappingURL=index.js.map

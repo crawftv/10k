@@ -34,7 +34,7 @@ main =
 
 
 type alias CNGModel =
-    { currentUser : Maybe User
+    { currentUser : User
     , newGoalName : Maybe String
     , newEndGoal : Maybe String
     , newGoalProgress : Maybe String
@@ -43,7 +43,7 @@ type alias CNGModel =
 
 initModel : CNGModel
 initModel =
-    (CNGModel Nothing Nothing Nothing Nothing)
+    (CNGModel { uid = "" } Nothing Nothing Nothing)
 
 
 init : ( CNGModel, Cmd Msg )
@@ -159,7 +159,7 @@ update : Msg -> CNGModel -> ( CNGModel, Cmd Msg )
 update msg model =
     case msg of
         LoadUser user ->
-            ( { model | currentUser = Just user }, Cmd.none )
+            ( { model | currentUser = user }, Cmd.none )
 
         NewGoalName goalName ->
             ( { model | newGoalName = Just goalName }, Cmd.none )

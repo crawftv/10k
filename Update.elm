@@ -15,7 +15,7 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         LoadUser user ->
-            ( { model | currentUser = Just user }, Cmd.none )
+            ( { model | currentUser = user }, Cmd.none )
 
         LoadGoals userGoals ->
             ( { model | userGoals = Just userGoals }, Cmd.none )

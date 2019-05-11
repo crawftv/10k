@@ -23340,9 +23340,9 @@ var _user$project$Model$User = F2(
 	function (a, b) {
 		return {email: a, uid: b};
 	});
-var _user$project$Model$Goal = F7(
-	function (a, b, c, d, e, f, g) {
-		return {goalName: a, endGoal: b, progress: c, fireStoreValue: d, addProgress: e, dateCreated: f, lastUpdate: g};
+var _user$project$Model$Goal = F9(
+	function (a, b, c, d, e, f, g, h, i) {
+		return {goalName: a, endGoal: b, progress: c, fireStoreValue: d, addProgress: e, dateCreated: f, lastUpdate: g, unixLastUpdate: h, unixDateCreated: i};
 	});
 var _user$project$Model$CNGModel = F4(
 	function (a, b, c, d) {
@@ -23496,8 +23496,18 @@ var _user$project$Update$loadGoals = _elm_lang$core$Native_Platform.incomingPort
 														return A2(
 															_elm_lang$core$Json_Decode$andThen,
 															function (lastUpdate) {
-																return _elm_lang$core$Json_Decode$succeed(
-																	{goalName: goalName, endGoal: endGoal, progress: progress, fireStoreValue: fireStoreValue, addProgress: addProgress, dateCreated: dateCreated, lastUpdate: lastUpdate});
+																return A2(
+																	_elm_lang$core$Json_Decode$andThen,
+																	function (unixLastUpdate) {
+																		return A2(
+																			_elm_lang$core$Json_Decode$andThen,
+																			function (unixDateCreated) {
+																				return _elm_lang$core$Json_Decode$succeed(
+																					{goalName: goalName, endGoal: endGoal, progress: progress, fireStoreValue: fireStoreValue, addProgress: addProgress, dateCreated: dateCreated, lastUpdate: lastUpdate, unixLastUpdate: unixLastUpdate, unixDateCreated: unixDateCreated});
+																			},
+																			A2(_elm_lang$core$Json_Decode$field, 'unixDateCreated', _elm_lang$core$Json_Decode$float));
+																	},
+																	A2(_elm_lang$core$Json_Decode$field, 'unixLastUpdate', _elm_lang$core$Json_Decode$float));
 															},
 															A2(_elm_lang$core$Json_Decode$field, 'lastUpdate', _elm_lang$core$Json_Decode$string));
 													},
@@ -23918,7 +23928,7 @@ var _user$project$LandingNavBar$navBar = A3(
 			ctor: '::',
 			_0: A2(
 				_mdgriffith$style_elements$Element$link,
-				'login.html',
+				'https://plasso.com/s/XmXME9WRs3-finishyourgoalscom',
 				A3(
 					_mdgriffith$style_elements$Element$button,
 					_user$project$StyleSheets$ButtonView,
@@ -23961,19 +23971,21 @@ var _user$project$LandingNavBar$topBarView = A3(
 		}
 	});
 
-var _user$project$DesktopLandingPage$ctaView = A3(
-	_mdgriffith$style_elements$Element$el,
-	_user$project$StyleSheets$CTAView,
-	{
-		ctor: '::',
-		_0: _mdgriffith$style_elements$Element_Attributes$center,
-		_1: {
+var _user$project$DesktopLandingPage$ctaView = function (string) {
+	return A3(
+		_mdgriffith$style_elements$Element$el,
+		_user$project$StyleSheets$CTAView,
+		{
 			ctor: '::',
-			_0: _mdgriffith$style_elements$Element_Attributes$verticalCenter,
-			_1: {ctor: '[]'}
-		}
-	},
-	_mdgriffith$style_elements$Element$text('Click to Sign-up with email and get started today!'));
+			_0: _mdgriffith$style_elements$Element_Attributes$center,
+			_1: {
+				ctor: '::',
+				_0: _mdgriffith$style_elements$Element_Attributes$verticalCenter,
+				_1: {ctor: '[]'}
+			}
+		},
+		_mdgriffith$style_elements$Element$text(string));
+};
 var _user$project$DesktopLandingPage$noStyle = _user$project$StyleSheets$NoStyle;
 var _user$project$DesktopLandingPage$heroView = A3(
 	_mdgriffith$style_elements$Element$column,
@@ -24143,7 +24155,7 @@ var _user$project$DesktopLandingPage$landingPageArea = A3(
 							_mdgriffith$style_elements$Element_Attributes$px(300)),
 						_1: {ctor: '[]'}
 					},
-					_user$project$DesktopLandingPage$ctaView),
+					_user$project$DesktopLandingPage$ctaView('Sign-up! and Get Started Today!')),
 				_1: {
 					ctor: '::',
 					_0: A3(
@@ -24167,7 +24179,7 @@ var _user$project$DesktopLandingPage$landingPageArea = A3(
 									_mdgriffith$style_elements$Element_Attributes$px(300)),
 								_1: {ctor: '[]'}
 							},
-							_user$project$DesktopLandingPage$ctaView),
+							_user$project$DesktopLandingPage$ctaView('This offer is limited to 200 motivated people Sign-up to get a spot!')),
 						_1: {ctor: '[]'}
 					}
 				}
@@ -24196,6 +24208,10 @@ var _user$project$Main$selectGoalButton = function (currentGoal) {
 		},
 		_mdgriffith$style_elements$Element$text('update this goal'));
 };
+var _user$project$Main$getPace = F3(
+	function (unixLastUpdate, unixDateCreated, progress) {
+		return progress / ((unixLastUpdate - unixDateCreated) / 86400);
+	});
 var _user$project$Main$noStyle = _user$project$StyleSheets$NoStyle;
 var _user$project$Main$goalIndividualView = function (goal) {
 	return A3(
@@ -24380,42 +24396,122 @@ var _user$project$Main$goalIndividualView = function (goal) {
 							_1: {
 								ctor: '::',
 								_0: A3(
-									_mdgriffith$style_elements$Element_Input$text,
-									_user$project$StyleSheets$IndividualGoalStyle,
+									_mdgriffith$style_elements$Element$row,
+									_user$project$Main$noStyle,
+									{ctor: '[]'},
 									{
 										ctor: '::',
-										_0: _mdgriffith$style_elements$Element_Attributes$width(
-											_mdgriffith$style_elements$Element_Attributes$percent(50)),
+										_0: A3(
+											_mdgriffith$style_elements$Element$el,
+											_user$project$Main$noStyle,
+											{
+												ctor: '::',
+												_0: _mdgriffith$style_elements$Element_Attributes$width(
+													_mdgriffith$style_elements$Element_Attributes$percent(50)),
+												_1: {ctor: '[]'}
+											},
+											_mdgriffith$style_elements$Element$text('Pace: ')),
 										_1: {
 											ctor: '::',
-											_0: _mdgriffith$style_elements$Element_Attributes$paddingBottom(5),
+											_0: A3(
+												_mdgriffith$style_elements$Element$el,
+												_user$project$Main$noStyle,
+												{
+													ctor: '::',
+													_0: _mdgriffith$style_elements$Element_Attributes$width(
+														_mdgriffith$style_elements$Element_Attributes$percent(50)),
+													_1: {ctor: '[]'}
+												},
+												_mdgriffith$style_elements$Element$text(
+													A2(
+														_elm_lang$core$Basics_ops['++'],
+														_elm_lang$core$Basics$toString(
+															_elm_lang$core$Basics$ceiling(
+																A3(_user$project$Main$getPace, goal.unixLastUpdate, goal.unixDateCreated, goal.progress))),
+														' steps per day'))),
 											_1: {ctor: '[]'}
 										}
-									},
-									{
-										onChange: _user$project$Update$AddProgress,
-										value: goal.addProgress,
-										label: _mdgriffith$style_elements$Element_Input$placeholder(
-											{
-												label: _mdgriffith$style_elements$Element_Input$labelLeft(
-													A3(
-														_mdgriffith$style_elements$Element$el,
-														_user$project$Main$noStyle,
-														{
-															ctor: '::',
-															_0: _mdgriffith$style_elements$Element_Attributes$width(
-																_mdgriffith$style_elements$Element_Attributes$percent(50)),
-															_1: {ctor: '[]'}
-														},
-														_mdgriffith$style_elements$Element$text('Update this goal?: '))),
-												text: ''
-											}),
-										options: {ctor: '[]'}
 									}),
 								_1: {
 									ctor: '::',
-									_0: _user$project$Main$selectGoalButton(goal),
-									_1: {ctor: '[]'}
+									_0: A3(
+										_mdgriffith$style_elements$Element$row,
+										_user$project$Main$noStyle,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: A3(
+												_mdgriffith$style_elements$Element$el,
+												_user$project$Main$noStyle,
+												{
+													ctor: '::',
+													_0: _mdgriffith$style_elements$Element_Attributes$width(
+														_mdgriffith$style_elements$Element_Attributes$percent(50)),
+													_1: {ctor: '[]'}
+												},
+												_mdgriffith$style_elements$Element$text('Projected number of days until finishing: ')),
+											_1: {
+												ctor: '::',
+												_0: A3(
+													_mdgriffith$style_elements$Element$el,
+													_user$project$Main$noStyle,
+													{
+														ctor: '::',
+														_0: _mdgriffith$style_elements$Element_Attributes$width(
+															_mdgriffith$style_elements$Element_Attributes$percent(50)),
+														_1: {ctor: '[]'}
+													},
+													_mdgriffith$style_elements$Element$text(
+														A2(
+															_elm_lang$core$Basics_ops['++'],
+															_elm_lang$core$Basics$toString(
+																_elm_lang$core$Basics$ceiling(
+																	(goal.endGoal - goal.progress) / A3(_user$project$Main$getPace, goal.unixLastUpdate, goal.unixDateCreated, goal.progress))),
+															' steps per day'))),
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A3(
+											_mdgriffith$style_elements$Element_Input$text,
+											_user$project$StyleSheets$IndividualGoalStyle,
+											{
+												ctor: '::',
+												_0: _mdgriffith$style_elements$Element_Attributes$width(
+													_mdgriffith$style_elements$Element_Attributes$percent(50)),
+												_1: {
+													ctor: '::',
+													_0: _mdgriffith$style_elements$Element_Attributes$paddingBottom(5),
+													_1: {ctor: '[]'}
+												}
+											},
+											{
+												onChange: _user$project$Update$AddProgress,
+												value: goal.addProgress,
+												label: _mdgriffith$style_elements$Element_Input$placeholder(
+													{
+														label: _mdgriffith$style_elements$Element_Input$labelLeft(
+															A3(
+																_mdgriffith$style_elements$Element$el,
+																_user$project$Main$noStyle,
+																{
+																	ctor: '::',
+																	_0: _mdgriffith$style_elements$Element_Attributes$width(
+																		_mdgriffith$style_elements$Element_Attributes$percent(50)),
+																	_1: {ctor: '[]'}
+																},
+																_mdgriffith$style_elements$Element$text('Update this goal?: '))),
+														text: ''
+													}),
+												options: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: _user$project$Main$selectGoalButton(goal),
+											_1: {ctor: '[]'}
+										}
+									}
 								}
 							}
 						}
@@ -24523,6 +24619,10 @@ var Elm = {};
 Elm['CreateNewGoal'] = Elm['CreateNewGoal'] || {};
 if (typeof _user$project$CreateNewGoal$main !== 'undefined') {
     _user$project$CreateNewGoal$main(Elm['CreateNewGoal'], 'CreateNewGoal', undefined);
+}
+Elm['LandingNavBar'] = Elm['LandingNavBar'] || {};
+if (typeof _user$project$LandingNavBar$main !== 'undefined') {
+    _user$project$LandingNavBar$main(Elm['LandingNavBar'], 'LandingNavBar', undefined);
 }
 Elm['Main'] = Elm['Main'] || {};
 if (typeof _user$project$Main$main !== 'undefined') {
