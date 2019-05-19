@@ -11,3 +11,4 @@ elm-package.json
 .firebase.json
 config.js
 main.js
+/elm-stuff/*
